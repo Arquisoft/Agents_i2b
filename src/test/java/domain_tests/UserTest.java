@@ -1,33 +1,26 @@
 package domain_tests;
 
-import domain.User;
-import util.JasyptEncryptor;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import domain.Agent;
+import util.JasyptEncryptor;
 
 /**
  * Created by Damian on 15/02/2017.
  */
 public class UserTest {
 
-    private User nico;
-    private User jorge;
-    private User damian;
+    private Agent nico;
+    private Agent jorge;
+    private Agent damian;
 
     @Before
     public void setUp(){
-        Calendar cal = Calendar.getInstance();
-        cal.set(1996, Calendar.JUNE, 12);
-        nico = new User("Nicolás", "Rivero", "nico@nicomail.com","nico123");
-        jorge = new User("Jorge", "Zapatero", "jorge@jorgemail.com", "jorge123", cal.getTime(), "C/ La calle", "España", "111111111A");
-        cal.set(1997, Calendar.AUGUST, 1);
-        damian = new User("Damian", "Rubio", "damian@damianmail.com", "damian123", cal.getTime(), "C/ The street", "Inglaterra", "222222222B");
+        nico = new Agent("Nicolás", "Rivero", "nico@nicomail.com","nico123");
+        jorge = new Agent("Jorge", "Zapatero", "jorge@jorgemail.com", "jorge123", "C/ La calle", "España", "111111111A");
+        damian = new Agent("Damian", "Rubio", "damian@damianmail.com", "damian123", "C/ The street", "Inglaterra", "222222222B");
     }
 
     @Test
@@ -87,23 +80,6 @@ public class UserTest {
 
         damian.setPassword("yay");
         Assert.assertTrue(encryptor.checkPassword( "yay",damian.getPassword()));
-    }
-
-    @Test
-    public void dateOfBirthTest(){
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        Calendar cal = Calendar.getInstance();
-
-        cal.set(1996, Calendar.JUNE, 12);
-        Assert.assertEquals(format.format(cal.getTime()), format.format(jorge.getDateOfBirth()));
-
-        cal.set(1996, Calendar.AUGUST, 12);
-        nico.setDateOfBirth(cal.getTime());
-        Assert.assertEquals(format.format(cal.getTime()), format.format(nico.getDateOfBirth()));
-
-        cal.set(1900, Calendar.FEBRUARY, 1);
-        damian.setDateOfBirth(cal.getTime());
-        Assert.assertEquals(format.format(cal.getTime()), format.format(damian.getDateOfBirth()));
     }
 
     @Test

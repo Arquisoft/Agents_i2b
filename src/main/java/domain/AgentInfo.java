@@ -6,22 +6,25 @@ import java.io.Serializable;
  * Created by Nicolás on 15/02/2017.
  * Class that serves as a response for the service, providing a subset of the User class' fields
  */
-public class UserInfo implements Serializable{
+public class AgentInfo implements Serializable{
 
-    private String firstName;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6796982835270172418L;
+	
+	private String firstName;
     private String lastName;
-    private int age;
     private String userId;
     private String email;
 
-    UserInfo(){
+    AgentInfo(){
 
     }
 
-    public UserInfo(String firstName, String lastName, int age, String userId, String email) {
+    public AgentInfo(String firstName, String lastName, String userId, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
         this.userId = userId;
         this.email = email;
     }
@@ -32,10 +35,6 @@ public class UserInfo implements Serializable{
 
     public String getLastName() {
         return lastName;
-    }
-
-    public int getAge() {
-        return age;
     }
 
     public String getUserId() {
@@ -54,10 +53,6 @@ public class UserInfo implements Serializable{
         this.lastName = lastName;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -71,7 +66,6 @@ public class UserInfo implements Serializable{
         final StringBuilder sb = new StringBuilder("UserInfo{");
         sb.append("firstName='").append(firstName).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", age=").append(age);
         sb.append(", userId='").append(userId).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append('}');
@@ -83,7 +77,7 @@ public class UserInfo implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserInfo userInfo = (UserInfo) o;
+        AgentInfo userInfo = (AgentInfo) o;
 
         return userId.equals(userInfo.userId);
     }

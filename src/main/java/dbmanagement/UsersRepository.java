@@ -1,6 +1,6 @@
 package dbmanagement;
 
-import domain.User;
+import domain.Agent;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface UsersRepository extends MongoRepository<User, ObjectId>{
+public interface UsersRepository extends MongoRepository<Agent, ObjectId>{
 
-    User findByEmail(String email);
-    User findByEmailAndPassword(String email, String password);
+    Agent findByEmail(String email);
+    Agent findByEmailAndPassword(String email, String password);
 }

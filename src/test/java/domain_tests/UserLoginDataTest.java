@@ -1,6 +1,6 @@
 package domain_tests;
 
-import domain.UserLoginData;
+import domain.AgentLoginData;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,11 +11,11 @@ import static org.junit.Assert.*;
  */
 public class UserLoginDataTest {
 
-    private UserLoginData test;
+    private AgentLoginData test;
 
     @Before
     public void setUp() {
-        test = new UserLoginData();
+        test = new AgentLoginData();
         test.setLogin("hola1");
         test.setPassword("holaPassword");
     }

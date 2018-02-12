@@ -1,9 +1,9 @@
 package view;
 
-import domain.User;
-import domain.UserInfo;
-import domain.UserInfoAdapter;
-import domain.UserLoginData;
+import domain.Agent;
+import domain.AgentInfo;
+import domain.AgentInfoAdapter;
+import domain.AgentLoginData;
 import org.springframework.web.bind.annotation.*;
 import services.ParticipantsService;
 import util.JasyptEncryptor;
@@ -29,23 +29,22 @@ public class ParticipantsController {
     //The first page shown will be login.html.
     @GetMapping(value="/")
     public String getParticipantInfo(Model model) {
-        model.addAttribute("userinfo", new UserLoginData());
+        model.addAttribute("userinfo", new AgentLoginData());
         return "login";
     }
 
     //This method process an POST html request once fulfilled the login.html form (clicking in the "Enter" button).
     @RequestMapping(value = "/userForm", method = RequestMethod.POST)
-    public String showInfo(Model model, @ModelAttribute UserLoginData data, HttpSession session){
-        User user = part.getParticipant(data.getLogin(), data.getPassword());
+    public String showInfo(Model model, @ModelAttribute AgentLoginData data, HttpSession session){
+        Agent user = part.getParticipant(data.getLogin(), data.getPassword());
         if(user == null){
             throw new UserNotFoundException();
         }
         else {
-            UserInfoAdapter adapter = new UserInfoAdapter(user);
-            UserInfo info = adapter.userToInfo();
+            AgentInfoAdapter adapter = new AgentInfoAdapter(user);
+            AgentInfo info = adapter.userToInfo();
             model.addAttribute("fName", info.getFirstName());
             model.addAttribute("lName", info.getLastName());
-            model.addAttribute("age", info.getAge());
             model.addAttribute("email", info.getEmail());
             model.addAttribute("user", user);
             session.setAttribute("user", user);
@@ -65,7 +64,7 @@ public class ParticipantsController {
             , @RequestParam String newPasswordConfirm
             , HttpSession session){
         JasyptEncryptor encryptor= new JasyptEncryptor();
-        User loggedUser = (User) session.getAttribute("user");
+        Agent loggedUser = (Agent) session.getAttribute("user");
         if(encryptor.checkPassword(password, loggedUser.getPassword()) &&
                 newPassword.equals(newPasswordConfirm)){
             part.updateInfo(loggedUser, newPassword);
