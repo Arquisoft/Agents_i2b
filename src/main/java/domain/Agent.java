@@ -6,14 +6,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import util.JasyptEncryptor;
 
-import java.util.Date;
-
 /**
  * Created by Damian on 06/02/2017.
  */
 
 @Document(collection ="users")
-public class User {
+public class Agent {
 
     @Id
     private ObjectId id;
@@ -22,27 +20,25 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private Date dateOfBirth;
     private String address;
     private String nationality;
     private String userId;
 
 
-    User(){
+    Agent(){
 
     }
 
-    public User(String firstName, String lastName, String email, String password) {
+    public Agent(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password=encryptPass(password); 
     }
 
-    public User(String firstName, String lastName, String email,
-                String password, Date dateOfBirth, String address, String nationality, String userId) {
+    public Agent(String firstName, String lastName, String email,
+                String password, String address, String nationality, String userId) {
         this(firstName, lastName, email, password);
-        this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.nationality = nationality;
         this.userId = userId;
@@ -55,7 +51,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", address='" + address + '\'' +
                 ", nationality='" + nationality + '\'' +
                 ", userId='" + userId + '\'' +
@@ -67,7 +62,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        Agent user = (Agent) o;
 
         return userId.equals(user.userId);
 
@@ -92,10 +87,6 @@ public class User {
 
     public String getPassword() {
         return password;
-    }
-
-    public Date getDateOfBirth() {
-        return new Date(dateOfBirth.getTime());
     }
 
     public String getAddress() {
@@ -124,10 +115,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = encryptPass(password);
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public void setAddress(String address) {
