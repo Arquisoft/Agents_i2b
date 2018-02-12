@@ -11,7 +11,7 @@ Skeleton of participants module
 - Alejandro González Hevia (@alejgh)
 - Carmen Sors González (@carmee-en)
 - Alvaro Tejido Jardón (@)
-- Eduardo Ulibarri Toledo (@)
+- Eduardo Ulibarri Toledo (@uo251436)
 
 # Previous Authors (2016-2017)
 
