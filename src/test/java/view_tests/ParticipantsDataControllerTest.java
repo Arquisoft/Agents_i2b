@@ -6,8 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Calendar;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,11 +49,6 @@ public class ParticipantsDataControllerTest {
 
 		session = new MockHttpSession();
 
-		// Setting up maria
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, 1990);
-		cal.set(Calendar.MONTH, 1);
-		cal.set(Calendar.DAY_OF_MONTH, 1);
 		plainPassword = "pass14753";
 		maria = new Agent("Maria", "MamaMia", "asd", plainPassword, "Hallo", "Core", "158");
 		repo.insert(maria);
@@ -80,7 +73,6 @@ public class ParticipantsDataControllerTest {
 							.andExpect(status().isOk()) //The state of the response must be OK. (200);
 							.andExpect(jsonPath("$.firstName",is(maria.getFirstName()))) //We can do jsonpaths in order to check that the json information displayes its ok.
                             .andExpect(jsonPath("$.lastName", is(maria.getLastName())))
-                            .andExpect(jsonPath("$.age", is(27)))//Born in 1996
                             .andExpect(jsonPath("$.userId", is(maria.getUserId())))
                             .andExpect(jsonPath("$.email", is(maria.getEmail())));
 	}
@@ -98,7 +90,6 @@ public class ParticipantsDataControllerTest {
                 .andExpect(status().isOk()) //The state of the response must be OK. (200);
                 .andExpect(jsonPath("$.firstName",is(maria.getFirstName()))) //We can do jsonpaths in order to check that the json information displayes its ok.
                 .andExpect(jsonPath("$.lastName", is(maria.getLastName())))
-                .andExpect(jsonPath("$.age", is(27)))//Born in 1996
                 .andExpect(jsonPath("$.userId", is(maria.getUserId())))
                 .andExpect(jsonPath("$.email", is(maria.getEmail())));
     }
@@ -165,7 +156,6 @@ public class ParticipantsDataControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName",is(maria.getFirstName())))
                 .andExpect(jsonPath("$.lastName", is(maria.getLastName())))
-                .andExpect(jsonPath("$.age", is(27)))
                 .andExpect(jsonPath("$.userId", is(maria.getUserId())))
                 .andExpect(jsonPath("$.email", is(maria.getEmail())));
     }
