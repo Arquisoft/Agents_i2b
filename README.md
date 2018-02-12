@@ -11,7 +11,7 @@ Skeleton of participants module
 - Jose Emilio Labra Gayo (@labra)
 - Alejandro González Hevia (@alejgh)
 - Carmen Sors González (@carmee-en)
-- Alvaro Tejido Jardón (@)
+- Alvaro Tejido Jardón (@tejido18)
 - Eduardo Ulibarri Toledo (@uo251436)
 
 # Previous Authors (2016-2017)
