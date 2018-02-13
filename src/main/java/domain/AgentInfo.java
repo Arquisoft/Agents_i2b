@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Created by Nicolás on 15/02/2017.
+ * Adapted by Carmen on 13/02/2018.
+ * 
  * Class that serves as a response for the service, providing a subset of the User class' fields
  */
 public class AgentInfo implements Serializable{
@@ -14,14 +16,12 @@ public class AgentInfo implements Serializable{
 	private static final long serialVersionUID = 6796982835270172418L;
 		
 	private String name;
-	private double[] location = new double[2];
+	private double[] location;
 	private String email;
 	private String identifier;
 	private int kind;
 	
-    AgentInfo(){
-
-    }
+    AgentInfo(){ }
     
     public AgentInfo(String name, String email, String id, int kind)
     {
@@ -34,6 +34,7 @@ public class AgentInfo implements Serializable{
     public AgentInfo(String name, double longitude, double latitude, String email, String id, int kind)
     {
     	this(name, email, id, kind);
+    	this.location = new double[2];
     	this.location[0] = latitude;
     	this.location[1] = longitude;
     }
@@ -51,6 +52,8 @@ public class AgentInfo implements Serializable{
 	}
 
 	public void setLocation(double[] coordinates) {
+		if (location==null)
+			this.location = new double[2];
 		this.location = coordinates;
 	}
 
@@ -82,7 +85,8 @@ public class AgentInfo implements Serializable{
     public String toString() {
         final StringBuilder sb = new StringBuilder("UserInfo{");
         sb.append("name='").append(name).append('\'');
-        sb.append(", location='").append(location[0]).append(", ").append(location[1]).append('\'');
+        if (location!=null)
+        	sb.append(", location='").append(location[0]).append(", ").append(location[1]).append('\'');
         sb.append(", identifier='").append(identifier).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append(", kind='").append(kind).append('\'');
