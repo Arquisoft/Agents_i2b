@@ -19,20 +19,18 @@ public class UserAdapterTest {
 
     @Before
     public void setUp(){
-        user1 = new Agent("User1", "User1Apellido", "User1@hola.com", "user1Password",
-                			 "C/ hola", "spanish", "112233");
-        user2 = new Agent("User2", "User2Apellido", "User2@hola.com", "user2Password",
-                          "C/ hola", "spanish", "112233");
+        user1 = new Agent("User1", "User1@hola.com", "user1Password", "112233", 123);
+        user2 = new Agent("User2", "User2@hola.com", "user2Password", "4455566", 456);
     }
 
     @Test
     public void testAdapter(){
         AgentInfoAdapter adapter = new AgentInfoAdapter(user1);
         AgentInfo info = adapter.userToInfo();
-        assertEquals(info.getFirstName(), user1.getFirstName());
-        assertEquals(info.getLastName(), user1.getLastName());
+        assertEquals(info.getName(), user1.getName());
+        assertEquals(info.getKind(), user1.getKind());
         assertEquals(info.getEmail(), user1.getEmail());
-        assertEquals(info.getUserId(), user1.getUserId());
+        assertEquals(info.getIdentifier(), user1.getIdentifier());
     }
 
     @Test
@@ -40,8 +38,8 @@ public class UserAdapterTest {
         AgentInfoAdapter adapter = new AgentInfoAdapter(user2);
         AgentInfo info = adapter.userToInfo();
         String toString = info.toString();
-        String test = "UserInfo{firstName='User2', lastName='User2Apellido', " +
-                		  "userId='112233', email='User2@hola.com'}";
+        String test = "AgentInfo{name='User2', identifier='4455566', " +
+                		  "email='User2@hola.com', kind='456'}";
         assertEquals(toString, test);
     }
 

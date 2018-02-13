@@ -83,7 +83,7 @@ public class AgentInfo implements Serializable{
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("UserInfo{");
+        final StringBuilder sb = new StringBuilder("AgentInfo{");
         sb.append("name='").append(name).append('\'');
         if (location!=null)
         	sb.append(", location='").append(location[0]).append(", ").append(location[1]).append('\'');

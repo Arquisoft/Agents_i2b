@@ -18,38 +18,25 @@ public class UserTest {
 
     @Before
     public void setUp(){
-        nico = new Agent("Nicolás", "Rivero", "nico@nicomail.com","nico123");
-        jorge = new Agent("Jorge", "Zapatero", "jorge@jorgemail.com", "jorge123", "C/ La calle", "España", "111111111A");
-        damian = new Agent("Damian", "Rubio", "damian@damianmail.com", "damian123", "C/ The street", "Inglaterra", "222222222B");
+        nico = new Agent("Nicolás Rivero", "nico@nicomail.com","nico123");
+        jorge = new Agent("Jorge Zapatero", "jorge@jorgemail.com", "jorge123", "111111111A", 1);
+        damian = new Agent("Damian Rubio", "damian@damianmail.com", "damian123", "222222222B", 2);
     }
 
     @Test
     public void firstNameTest(){
-        Assert.assertEquals("Nicolás", nico.getFirstName());
-        Assert.assertEquals("Jorge", jorge.getFirstName());
-        Assert.assertEquals("Damian", damian.getFirstName());
+        Assert.assertEquals("Nicolás Rivero", nico.getName());
+        Assert.assertEquals("Jorge Zapatero", jorge.getName());
+        Assert.assertEquals("Damian Rubio", damian.getName());
 
-        nico.setFirstName("Antonio");
-        Assert.assertEquals("Antonio", nico.getFirstName());
+        nico.setName("Antonio A");
+        Assert.assertEquals("Antonio A", nico.getName());
 
-        jorge.setFirstName("Pepe");
-        Assert.assertEquals("Pepe", jorge.getFirstName());
+        jorge.setName("Pepe P");
+        Assert.assertEquals("Pepe P", jorge.getName());
 
-        damian.setFirstName("Roberto");
-        Assert.assertEquals("Roberto", damian.getFirstName());
-    }
-
-    @Test
-    public void lastNameTest(){
-
-        nico.setLastName(jorge.getLastName());
-        Assert.assertEquals("Zapatero", nico.getLastName());
-
-        jorge.setLastName(damian.getLastName());
-        Assert.assertEquals("Rubio", jorge.getLastName());
-
-        damian.setLastName("Fernández");
-        Assert.assertEquals("Fernández", damian.getLastName());
+        damian.setName("Roberto R");
+        Assert.assertEquals("Roberto R", damian.getName());
     }
 
     @Test
@@ -83,40 +70,13 @@ public class UserTest {
     }
 
     @Test
-    public void addressTest(){
-
-        nico.setAddress("C/ Su calle");
-        Assert.assertEquals("C/ Su calle", nico.getAddress());
-
-        jorge.setAddress(damian.getAddress());
-        Assert.assertEquals("C/ The street", jorge.getAddress());
-
-        damian.setAddress(nico.getAddress());
-        Assert.assertEquals("C/ Su calle", damian.getAddress());
-    }
-
-    @Test
-    public void nationalityTest(){
-
-        Assert.assertEquals(null, nico.getNationality());
-        nico.setNationality("Swazilandia");
-        Assert.assertEquals("Swazilandia", nico.getNationality());
-
-        jorge.setNationality(damian.getNationality());
-        Assert.assertEquals("Inglaterra", jorge.getNationality());
-
-        damian.setNationality(nico.getNationality());
-        Assert.assertEquals("Swazilandia", damian.getNationality());
-    }
-
-    @Test
     public void nifTest(){
 
-        Assert.assertEquals(null, nico.getUserId());
+        Assert.assertEquals(null, nico.getIdentifier());
 
-        Assert.assertEquals("111111111A", jorge.getUserId());
+        Assert.assertEquals("111111111A", jorge.getIdentifier());
 
-        Assert.assertEquals("222222222B", damian.getUserId());
+        Assert.assertEquals("222222222B", damian.getIdentifier());
     }
 
 }
