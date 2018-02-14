@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Created by Nicolás on 15/02/2017.
+ * Adapted by Carmen on 13/02/2018.
+ * 
  * Class that serves as a response for the service, providing a subset of the User class' fields
  */
 public class AgentInfo implements Serializable{
@@ -12,49 +14,67 @@ public class AgentInfo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6796982835270172418L;
+		
+	private String name;
+	private double[] location;
+	private String email;
+	private String identifier;
+	private int kind;
 	
-	private String firstName;
-    private String lastName;
-    private String userId;
-    private String email;
-
-    AgentInfo(){
-
+    AgentInfo(){ }
+    
+    public AgentInfo(String name, String email, String id, int kind)
+    {
+    	this.name = name;
+    	this.email = email;
+    	this.identifier = id;
+    	this.kind = kind;
+    }
+    
+    public AgentInfo(String name, double longitude, double latitude, String email, String id, int kind)
+    {
+    	this(name, email, id, kind);
+    	this.location = new double[2];
+    	this.location[0] = latitude;
+    	this.location[1] = longitude;
     }
 
-    public AgentInfo(String firstName, String lastName, String userId, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userId = userId;
-        this.email = email;
-    }
+    public String getName() {
+		return name;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public double[] getLocation() {
+		return location;
+	}
 
-    public String getUserId() {
-        return userId;
-    }
+	public void setLocation(double[] coordinates) {
+		if (location==null)
+			this.location = new double[2];
+		this.location = coordinates;
+	}
 
-    public String getEmail() {
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	public int getKind() {
+		return kind;
+	}
+
+	public void setKind(int kind) {
+		this.kind = kind;
+	}
+
+	public String getEmail() {
         return email;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public void setEmail(String email) {
@@ -63,11 +83,13 @@ public class AgentInfo implements Serializable{
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("UserInfo{");
-        sb.append("firstName='").append(firstName).append('\'');
-        sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", userId='").append(userId).append('\'');
+        final StringBuilder sb = new StringBuilder("AgentInfo{");
+        sb.append("name='").append(name).append('\'');
+        if (location!=null)
+        	sb.append(", location='").append(location[0]).append(", ").append(location[1]).append('\'');
+        sb.append(", identifier='").append(identifier).append('\'');
         sb.append(", email='").append(email).append('\'');
+        sb.append(", kind='").append(kind).append('\'');
         sb.append('}');
         return sb.toString();
     }
@@ -79,11 +101,11 @@ public class AgentInfo implements Serializable{
 
         AgentInfo userInfo = (AgentInfo) o;
 
-        return userId.equals(userInfo.userId);
+        return identifier.equals(userInfo.identifier);
     }
 
     @Override
     public int hashCode() {
-        return userId.hashCode();
+        return identifier.hashCode();
     }
 }

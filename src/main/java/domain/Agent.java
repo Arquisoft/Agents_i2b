@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Arrays;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,6 +10,7 @@ import util.JasyptEncryptor;
 
 /**
  * Created by Damian on 06/02/2017.
+ * Adapted by Carmen on 13/02/2018.
  */
 
 @Document(collection ="users")
@@ -16,47 +19,37 @@ public class Agent {
     @Id
     private ObjectId id;
 
-    private String firstName;
-    private String lastName;
+    private String name;
+    private double[] location;
     private String email;
     private String password;
-    private String address;
-    private String nationality;
-    private String userId;
+    private String identifier;
+    private int kind;
 
+    Agent(){ }
 
-    Agent(){
-
-    }
-
-    public Agent(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Agent(String name, String email, String password) {
+        this.name = name;
         this.email = email;
-        this.password=encryptPass(password); 
+        this.password = encryptPass(password); 
     }
 
-    public Agent(String firstName, String lastName, String email,
-                String password, String address, String nationality, String userId) {
-        this(firstName, lastName, email, password);
-        this.address = address;
-        this.nationality = nationality;
-        this.userId = userId;
+    public Agent(String name, String email, String password, 
+    		String identifier, int kind) {
+        this(name, email, password);
+        this.identifier = identifier;
+        this.kind = kind;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", address='" + address + '\'' +
-                ", nationality='" + nationality + '\'' +
-                ", userId='" + userId + '\'' +
-                '}';
+    
+    public Agent(String name, String email, String password, 
+    		String identifier, int kind, double latitude, double longitude) {
+    	
+    	this(name, email, password, identifier, kind);
+    	this.location = new double[2];
+    	this.location[0] = latitude;
+    	this.location[1] = longitude;
     }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,21 +57,26 @@ public class Agent {
 
         Agent user = (Agent) o;
 
-        return userId.equals(user.userId);
+        return identifier.equals(user.identifier);
 
     }
 
     @Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Agent [id=").append(id).append(", name=").append(name);
+		if (location!=null)
+			builder.append(", location=").append(Arrays.toString(location));
+		builder.append(", email=").append(email);
+		builder.append(", password=").append(password);
+		builder.append(", identifier=").append(identifier);
+		builder.append(", kind=").append(kind).append("]");
+		return builder.toString();
+	}
+
+	@Override
     public int hashCode() {
-        return userId.hashCode();
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+        return identifier.hashCode();
     }
 
     public String getEmail() {
@@ -89,26 +87,6 @@ public class Agent {
         return password;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -116,16 +94,50 @@ public class Agent {
     public void setPassword(String password) {
         this.password = encryptPass(password);
     }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
     
-    private String encryptPass(String password){
+    public ObjectId getId() {
+		return id;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double[] getLocation() {
+		return location;
+	}
+
+	public void setLocation(double[] location) {
+		if (this.location==null)
+			this.location = new double[2];
+		this.location = location;
+	}
+
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	public int getKind() {
+		return kind;
+	}
+
+	public void setKind(int kind) {
+		this.kind = kind;
+	}
+
+	private String encryptPass(String password){
     	JasyptEncryptor encryptor = new JasyptEncryptor();
         return encryptor.encryptPassword(password);
     }

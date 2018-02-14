@@ -50,7 +50,8 @@ public class ParticipantsDataControllerTest {
 		session = new MockHttpSession();
 
 		plainPassword = "pass14753";
-		maria = new Agent("Maria", "MamaMia", "asd", plainPassword, "Hallo", "Core", "158");
+		//maria = new Agent("Maria", "MamaMia", "asd", plainPassword, "Hallo", "Core", "158");
+		maria = new Agent("Maria", "maria@maria.es", plainPassword);
 		repo.insert(maria);
 	}
 	
@@ -71,9 +72,8 @@ public class ParticipantsDataControllerTest {
 		mockMvc.perform(request)
                             .andDo(print())//AndDoPrint it is very usefull to see the http response and see if something went wrong.
 							.andExpect(status().isOk()) //The state of the response must be OK. (200);
-							.andExpect(jsonPath("$.firstName",is(maria.getFirstName()))) //We can do jsonpaths in order to check that the json information displayes its ok.
-                            .andExpect(jsonPath("$.lastName", is(maria.getLastName())))
-                            .andExpect(jsonPath("$.userId", is(maria.getUserId())))
+							.andExpect(jsonPath("$.name",is(maria.getName()))) //We can do jsonpaths in order to check that the json information displayes its ok.
+                            .andExpect(jsonPath("$.identifier", is(maria.getIdentifier())))
                             .andExpect(jsonPath("$.email", is(maria.getEmail())));
 	}
     
@@ -88,9 +88,8 @@ public class ParticipantsDataControllerTest {
         mockMvc.perform(request)
                 .andDo(print())//AndDoPrint it is very usefull to see the http response and see if something went wrong.
                 .andExpect(status().isOk()) //The state of the response must be OK. (200);
-                .andExpect(jsonPath("$.firstName",is(maria.getFirstName()))) //We can do jsonpaths in order to check that the json information displayes its ok.
-                .andExpect(jsonPath("$.lastName", is(maria.getLastName())))
-                .andExpect(jsonPath("$.userId", is(maria.getUserId())))
+                .andExpect(jsonPath("$.name",is(maria.getName()))) //We can do jsonpaths in order to check that the json information displayes its ok.
+                .andExpect(jsonPath("$.identifier", is(maria.getIdentifier())))
                 .andExpect(jsonPath("$.email", is(maria.getEmail())));
     }
     
@@ -154,9 +153,8 @@ public class ParticipantsDataControllerTest {
         mockMvc.perform(request)
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName",is(maria.getFirstName())))
-                .andExpect(jsonPath("$.lastName", is(maria.getLastName())))
-                .andExpect(jsonPath("$.userId", is(maria.getUserId())))
+                .andExpect(jsonPath("$.name",is(maria.getName())))
+                .andExpect(jsonPath("$.identifier", is(maria.getIdentifier())))
                 .andExpect(jsonPath("$.email", is(maria.getEmail())));
     }
     

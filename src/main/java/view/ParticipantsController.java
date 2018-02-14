@@ -43,8 +43,9 @@ public class ParticipantsController {
         else {
             AgentInfoAdapter adapter = new AgentInfoAdapter(user);
             AgentInfo info = adapter.userToInfo();
-            model.addAttribute("fName", info.getFirstName());
-            model.addAttribute("lName", info.getLastName());
+            
+            model.addAttribute("name", info.getName());
+            model.addAttribute("identifier", info.getIdentifier());
             model.addAttribute("email", info.getEmail());
             model.addAttribute("user", user);
             session.setAttribute("user", user);
