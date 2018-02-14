@@ -5,7 +5,7 @@ import domain.AgentInfo;
 import domain.AgentInfoAdapter;
 import domain.AgentLoginData;
 import org.springframework.web.bind.annotation.*;
-import services.ParticipantsService;
+import services.AgentsService;
 import util.JasyptEncryptor;
 
 import org.springframework.stereotype.Controller;
@@ -16,39 +16,40 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by Nicolás on 08/02/2017.
+ * Adapted by Alejandro on 14/02/2018 (Agents).
  */
 @Controller
-public class ParticipantsController {
+public class AgentsController {
 
-    private final ParticipantsService part;
+    private final AgentsService agentsService;
 
-    ParticipantsController(ParticipantsService part){
-        this.part = part;
+    AgentsController(AgentsService part){
+        this.agentsService = part;
     }
 
     //The first page shown will be login.html.
     @GetMapping(value="/")
-    public String getParticipantInfo(Model model) {
+    public String getAgentInfo(Model model) {
         model.addAttribute("userinfo", new AgentLoginData());
         return "login";
     }
 
     //This method process an POST html request once fulfilled the login.html form (clicking in the "Enter" button).
-    @RequestMapping(value = "/userForm", method = RequestMethod.POST)
+    @RequestMapping(value = "/agentForm", method = RequestMethod.POST)
     public String showInfo(Model model, @ModelAttribute AgentLoginData data, HttpSession session){
-        Agent user = part.getParticipant(data.getLogin(), data.getPassword());
-        if(user == null){
+        Agent agent = agentsService.getAgent(data.getLogin(), data.getPassword(), data.getKind());
+        
+        if(agent == null){
             throw new UserNotFoundException();
-        }
-        else {
-            AgentInfoAdapter adapter = new AgentInfoAdapter(user);
+        } else {
+            AgentInfoAdapter adapter = new AgentInfoAdapter(agent);
             AgentInfo info = adapter.userToInfo();
             
             model.addAttribute("name", info.getName());
             model.addAttribute("identifier", info.getIdentifier());
             model.addAttribute("email", info.getEmail());
-            model.addAttribute("user", user);
-            session.setAttribute("user", user);
+            model.addAttribute("user", agent);
+            session.setAttribute("user", agent);
             return "data";
         }
     }
@@ -68,7 +69,7 @@ public class ParticipantsController {
         Agent loggedUser = (Agent) session.getAttribute("user");
         if(encryptor.checkPassword(password, loggedUser.getPassword()) &&
                 newPassword.equals(newPasswordConfirm)){
-            part.updateInfo(loggedUser, newPassword);
+            agentsService.updateInfo(loggedUser, newPassword);
             return "data";
         }
         return "changePassword";

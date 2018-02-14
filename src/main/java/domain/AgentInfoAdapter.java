@@ -2,8 +2,8 @@ package domain;
 
 /**
  * Created by Nicolás on 15/02/2017.
- * Class in charge of translating a User object into the response format
- * Note: this class only creates a model class that contains a subset of the fields in the User class
+ * Class in charge of translating an Agent object into the response format
+ * Note: this class only creates a model class that contains a subset of the fields in the Agent class
  */
 public class AgentInfoAdapter {
 

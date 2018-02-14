@@ -52,11 +52,11 @@ public class DatabaseTest {
 	@Test
 	public void testGetParticipant() {
 		// It should be previously encoded if the DB is given so this may be changed.
-		Agent user = dat.getParticipant("LGracia@gmail.com");
+		Agent user = dat.getAgent("LGracia@gmail.com");
 		user.setIdentifier("USA");
 		Assert.assertEquals(user.getIdentifier(), "USA");
 		Assert.assertNotEquals(testedUser.getIdentifier(), user.getIdentifier());
-		Agent DBUser = dat.getParticipant("LGracia@gmail.com"); // just in case, same as before.
+		Agent DBUser = dat.getAgent("LGracia@gmail.com"); // just in case, same as before.
 		// Should be different from as we changed a transient one.
 		Assert.assertNotEquals(user.getIdentifier(), DBUser.getIdentifier()); 
 	}
@@ -64,11 +64,11 @@ public class DatabaseTest {
 	@Test
 	public void testUpdateInfoWithPassword() {
 		// It should be previously encoded if the DB is given so this may be changed.
-		Agent user = dat.getParticipant("LGracia@gmail.com");
+		Agent user = dat.getAgent("LGracia@gmail.com");
 		user.setPassword("confidencial");
 		JasyptEncryptor encryptor = new JasyptEncryptor();
 		dat.updateInfo(user);
-		Agent userAfter = dat.getParticipant("LGracia@gmail.com");
+		Agent userAfter = dat.getAgent("LGracia@gmail.com");
 		// They should be the same when we introduce the password.
 		Assert.assertTrue(encryptor.checkPassword("confidencial", userAfter.getPassword())); 
 		Assert.assertEquals(user, userAfter); // They should be the same user by the equals.
@@ -77,7 +77,7 @@ public class DatabaseTest {
 
 	@Test
 	public void testUpdateInfoAndAdaptation() {
-		Agent user = dat.getParticipant("asd");
+		Agent user = dat.getAgent("asd");
 		Assert.assertEquals("Maria MamaMia", user.getName());
 		Assert.assertEquals(25, user.getKind());
 		Assert.assertEquals("363636H", user.getIdentifier());
@@ -95,7 +95,7 @@ public class DatabaseTest {
 		user.setName("Pepa Trump");
 
 		dat.updateInfo(user);
-		Agent updatedUser = dat.getParticipant("asd");
+		Agent updatedUser = dat.getAgent("asd");
 		Assert.assertEquals("Pepa Trump", updatedUser.getName());
 		Assert.assertEquals(25, updatedUser.getKind());
 		Assert.assertEquals("363636H", updatedUser.getIdentifier());
