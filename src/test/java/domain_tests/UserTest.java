@@ -60,8 +60,6 @@ public class UserTest {
     	JasyptEncryptor encryptor = new JasyptEncryptor();
     	
         nico.setPassword("1234");
-        
-    
         Assert.assertTrue(encryptor.checkPassword( "1234",nico.getPassword()));
 
         jorge.setPassword("abcd");
@@ -75,10 +73,13 @@ public class UserTest {
     public void nifTest(){
 
         Assert.assertEquals(null, nico.getIdentifier());
-
         Assert.assertEquals("111111111A", jorge.getIdentifier());
-
         Assert.assertEquals("222222222B", damian.getIdentifier());
+        Assert.assertEquals("181818S", carmen.getIdentifier());
+        
+        carmen.setIdentifier("777");
+        Assert.assertEquals("777", carmen.getIdentifier());
+        
     }
     
     @Test
