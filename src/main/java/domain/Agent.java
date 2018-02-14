@@ -116,6 +116,8 @@ public class Agent {
 	}
 
 	public void setLocation(double[] location) {
+		if (this.location==null)
+			this.location = new double[2];
 		this.location = location;
 	}
 
