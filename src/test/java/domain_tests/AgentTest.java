@@ -10,7 +10,7 @@ import util.JasyptEncryptor;
 /**
  * Created by Damian on 15/02/2017.
  */
-public class UserTest {
+public class AgentTest {
 
     private Agent nico;
     private Agent jorge;

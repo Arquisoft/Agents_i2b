@@ -1,4 +1,4 @@
-package view;
+package controllers;
 
 import domain.Agent;
 import domain.AgentInfo;

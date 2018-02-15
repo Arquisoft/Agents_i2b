@@ -12,7 +12,7 @@ import domain.AgentInfoAdapter;
 /**
  * Created by Nicolás on 18/02/2017.
  */
-public class UserAdapterTest {
+public class AgentAdapterTest {
 
     private Agent user1;
     private Agent user2;

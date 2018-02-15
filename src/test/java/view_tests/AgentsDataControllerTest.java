@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import dbmanagement.UsersRepository;
+import dbmanagement.AgentsRepository;
 import domain.Agent;
 import main.Application;
 
@@ -36,7 +36,7 @@ public class AgentsDataControllerTest {
 	
 	
 	@Autowired
-	private UsersRepository repo;
+	private AgentsRepository repo;
 
 	private MockHttpSession session;
 	
@@ -60,7 +60,7 @@ public class AgentsDataControllerTest {
 	}
 
     @Test
-	public void userInsertInformation() throws Exception{
+	public void agentInsertInformation() throws Exception{
 		String payload = String.format("{\"login\":\"%s\", \"password\":\"%s\", \"kind\": \"%d\"}", 
 									  maria.getUsername(), plainPassword, maria.getKind());
 		
@@ -81,7 +81,7 @@ public class AgentsDataControllerTest {
 	}
     
     @Test
-    public void userInsertInformationXML() throws Exception{
+    public void agentInsertInformationXML() throws Exception{
         String payload = String.format("<data><login>%s</login><password>%s</password><kind>%d</kind></data>",
         		maria.getUsername(), plainPassword, maria.getKind());
         
@@ -100,7 +100,7 @@ public class AgentsDataControllerTest {
     }
     
 	@Test
-	public void userInterfaceInsertInfoCorect() throws Exception {
+	public void agentInterfaceInsertInfoCorect() throws Exception {
 		MockHttpServletRequestBuilder request = post("/agentForm")
 				.session(session)
 				.param("login", maria.getUsername())

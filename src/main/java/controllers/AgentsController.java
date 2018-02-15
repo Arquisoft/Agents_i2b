@@ -1,4 +1,4 @@
-package view;
+package controllers;
 
 import domain.Agent;
 import domain.AgentInfo;
@@ -7,6 +7,7 @@ import domain.AgentLoginData;
 import org.springframework.web.bind.annotation.*;
 import services.AgentsService;
 import util.JasyptEncryptor;
+import util.exception.AgentNotFoundException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +41,7 @@ public class AgentsController {
         Agent agent = agentsService.getAgent(data.getLogin(), data.getPassword(), data.getKind());
         System.out.println(agent);
         if(agent == null) {
-            throw new UserNotFoundException();
+            throw new AgentNotFoundException();
         } else {
             AgentInfoAdapter adapter = new AgentInfoAdapter(agent);
             AgentInfo info = adapter.userToInfo();

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface UsersRepository extends MongoRepository<Agent, ObjectId>{
+public interface AgentsRepository extends MongoRepository<Agent, ObjectId>{
 
     Agent findByUsername(String username);
     Agent findByUsernameAndPassword(String username, String password);

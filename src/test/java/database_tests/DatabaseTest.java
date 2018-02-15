@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import dbmanagement.Database;
-import dbmanagement.UsersRepository;
+import dbmanagement.AgentsRepository;
 import domain.Agent;
 import domain.AgentInfo;
 import domain.AgentInfoAdapter;
@@ -25,7 +25,7 @@ import util.JasyptEncryptor;
 public class DatabaseTest {
 
 	@Autowired
-	private UsersRepository repo;
+	private AgentsRepository repo;
 
 	// User to use as reference for test
 	private Agent testedUser;
