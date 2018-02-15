@@ -8,30 +8,31 @@ import util.JasyptEncryptor;
 
 /**
  * Created by Nicolás on 14/02/2017.
+ * Adapted by Alejandro on 14/02/2018 (Agents).
  */
 @Service
-public class PartipantsServiceImpl implements ParticipantsService {
+public class AgentsServiceImpl implements AgentsService {
 
     private final Database dat;
     private final JasyptEncryptor encryptor = new JasyptEncryptor();
 
     @Autowired
-    PartipantsServiceImpl(Database dat){
+    AgentsServiceImpl(Database dat){
         this.dat = dat;
     }
 
     @Override
-    public Agent getParticipant(String email, String password) {
-        Agent user = dat.getParticipant(email);
+    public Agent getAgent(String username, String password, int kind) {
+        Agent user = dat.getAgent(username);
         if(user != null && encryptor.checkPassword(password, user.getPassword()))
             return user;
         else return null;
     }
 
     @Override
-    public void updateInfo(Agent user, String newPassword) {
-    	//It is not necessary, done by the domain class itself.
-    	user.setPassword(newPassword);
-    	dat.updateInfo(user);
+    public void updateInfo(Agent agent, String newPassword) {
+	    	//It is not necessary, done by the domain class itself.
+	    	agent.setPassword(newPassword);
+	    	dat.updateInfo(agent);
     }
 }

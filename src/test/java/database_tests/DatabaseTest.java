@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import dbmanagement.Database;
-import dbmanagement.UsersRepository;
+import dbmanagement.AgentsRepository;
 import domain.Agent;
 import domain.AgentInfo;
 import domain.AgentInfoAdapter;
@@ -25,7 +25,7 @@ import util.JasyptEncryptor;
 public class DatabaseTest {
 
 	@Autowired
-	private UsersRepository repo;
+	private AgentsRepository repo;
 
 	// User to use as reference for test
 	private Agent testedUser;
@@ -52,23 +52,23 @@ public class DatabaseTest {
 	@Test
 	public void testGetParticipant() {
 		// It should be previously encoded if the DB is given so this may be changed.
-		Agent user = dat.getParticipant("LGracia@gmail.com");
-		user.setIdentifier("USA");
-		Assert.assertEquals(user.getIdentifier(), "USA");
-		Assert.assertNotEquals(testedUser.getIdentifier(), user.getIdentifier());
-		Agent DBUser = dat.getParticipant("LGracia@gmail.com"); // just in case, same as before.
+		Agent user = dat.getAgent("147986");
+		user.setUsername("USA");
+		Assert.assertEquals(user.getUsername(), "USA");
+		Assert.assertNotEquals(testedUser.getUsername(), user.getUsername());
+		Agent DBUser = dat.getAgent("147986");
 		// Should be different from as we changed a transient one.
-		Assert.assertNotEquals(user.getIdentifier(), DBUser.getIdentifier()); 
+		Assert.assertNotEquals(user.getUsername(), DBUser.getUsername()); 
 	}
 
 	@Test
 	public void testUpdateInfoWithPassword() {
 		// It should be previously encoded if the DB is given so this may be changed.
-		Agent user = dat.getParticipant("LGracia@gmail.com");
+		Agent user = dat.getAgent("147986");
 		user.setPassword("confidencial");
 		JasyptEncryptor encryptor = new JasyptEncryptor();
 		dat.updateInfo(user);
-		Agent userAfter = dat.getParticipant("LGracia@gmail.com");
+		Agent userAfter = dat.getAgent("147986");
 		// They should be the same when we introduce the password.
 		Assert.assertTrue(encryptor.checkPassword("confidencial", userAfter.getPassword())); 
 		Assert.assertEquals(user, userAfter); // They should be the same user by the equals.
@@ -77,10 +77,10 @@ public class DatabaseTest {
 
 	@Test
 	public void testUpdateInfoAndAdaptation() {
-		Agent user = dat.getParticipant("asd");
+		Agent user = dat.getAgent("363636H");
 		Assert.assertEquals("Maria MamaMia", user.getName());
 		Assert.assertEquals(25, user.getKind());
-		Assert.assertEquals("363636H", user.getIdentifier());
+		Assert.assertEquals("363636H", user.getUsername());
 		Assert.assertEquals("asd", user.getEmail());
 
 		AgentInfoAdapter userAdapter = new AgentInfoAdapter(user);
@@ -90,15 +90,15 @@ public class DatabaseTest {
 		Assert.assertEquals(user.getName(), userInfo.getName());
 		Assert.assertEquals(user.getKind(), userInfo.getKind());
 		Assert.assertEquals(user.getEmail(), userInfo.getEmail());
-		Assert.assertEquals(user.getIdentifier(), userInfo.getIdentifier());
+		Assert.assertEquals(user.getUsername(), userInfo.getIdentifier());
 
 		user.setName("Pepa Trump");
 
 		dat.updateInfo(user);
-		Agent updatedUser = dat.getParticipant("asd");
+		Agent updatedUser = dat.getAgent("363636H");
 		Assert.assertEquals("Pepa Trump", updatedUser.getName());
 		Assert.assertEquals(25, updatedUser.getKind());
-		Assert.assertEquals("363636H", updatedUser.getIdentifier());
+		Assert.assertEquals("363636H", updatedUser.getUsername());
 		Assert.assertEquals("asd", updatedUser.getEmail());
 
 	}

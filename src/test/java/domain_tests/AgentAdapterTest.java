@@ -12,7 +12,7 @@ import domain.AgentInfoAdapter;
 /**
  * Created by Nicolás on 18/02/2017.
  */
-public class UserAdapterTest {
+public class AgentAdapterTest {
 
     private Agent user1;
     private Agent user2;
@@ -30,7 +30,7 @@ public class UserAdapterTest {
         assertEquals(info.getName(), user1.getName());
         assertEquals(info.getKind(), user1.getKind());
         assertEquals(info.getEmail(), user1.getEmail());
-        assertEquals(info.getIdentifier(), user1.getIdentifier());
+        assertEquals(info.getIdentifier(), user1.getUsername());
     }
 
     @Test

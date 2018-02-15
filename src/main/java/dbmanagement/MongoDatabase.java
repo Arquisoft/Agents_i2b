@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class MongoDatabase implements Database{
 	
 	@Autowired
-	private UsersRepository users;
+	private AgentsRepository users;
 
     @Override
 	public void updateInfo(Agent user) {
@@ -16,8 +16,8 @@ public class MongoDatabase implements Database{
 	}
 
 	@Override
-	public Agent getParticipant(String email) {
-		return users.findByEmail(email);
+	public Agent getAgent(String username) {
+		return users.findByUsername(username);
 	}
 
 }

@@ -7,14 +7,14 @@ public class AgentLoginData {
 
 	private String login;
 	private String password;
+	private int kind;
 
-	public AgentLoginData(){
+	public AgentLoginData() {}
 
-	}
-
-	public AgentLoginData(String login, String password) {
+	public AgentLoginData(String login, String password, int kind) {
 		this.login = login;
 		this.password = password;
+		this.kind = kind;
 	}
 
 	public String getLogin() {
@@ -24,6 +24,10 @@ public class AgentLoginData {
     public String getPassword() {
 		return password;
 	}
+    
+    public int getKind() {
+    		return kind;
+    }
 
 	public void setLogin(String login) {
 		this.login = login;
@@ -31,5 +35,9 @@ public class AgentLoginData {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public void setKind(int kind) {
+		this.kind = kind;
 	}
 }
