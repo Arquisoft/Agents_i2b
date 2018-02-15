@@ -8,7 +8,7 @@ import util.JasyptEncryptor;
 
 /**
  * Created by Nicolás on 14/02/2017.
- * Modified by Alejandro on 14/02/2018 (Agents).
+ * Adapted by Alejandro on 14/02/2018 (Agents).
  */
 @Service
 public class AgentsServiceImpl implements AgentsService {
@@ -24,6 +24,7 @@ public class AgentsServiceImpl implements AgentsService {
     @Override
     public Agent getAgent(String username, String password, int kind) {
         Agent user = dat.getAgent(username);
+        System.out.println(user.getPassword());
         if(user != null && encryptor.checkPassword(password, user.getPassword()))
             return user;
         else return null;

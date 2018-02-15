@@ -16,10 +16,10 @@ public class AgentInfoAdapter {
     public AgentInfo userToInfo(){
     	if (user.getLocation()!=null)
     		return new AgentInfo(user.getName(), user.getLocation()[0],
-        		user.getLocation()[1], user.getEmail(), user.getIdentifier(),
+        		user.getLocation()[1], user.getEmail(), user.getUsername(),
         		user.getKind());
     	else
     		return new AgentInfo(user.getName(), user.getEmail(), 
-    				user.getIdentifier(), user.getKind());
+    				user.getUsername(), user.getKind());
     }
 }

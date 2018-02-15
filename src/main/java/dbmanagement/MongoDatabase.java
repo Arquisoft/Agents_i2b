@@ -16,8 +16,8 @@ public class MongoDatabase implements Database{
 	}
 
 	@Override
-	public Agent getAgent(String email) {
-		return users.findByEmail(email);
+	public Agent getAgent(String username) {
+		return users.findByUsername(username);
 	}
 
 }

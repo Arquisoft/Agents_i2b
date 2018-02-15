@@ -23,7 +23,7 @@ public class Agent {
     private double[] location;
     private String email;
     private String password;
-    private String identifier;
+    private String username;
     private int kind;
 
     Agent(){ }
@@ -35,19 +35,19 @@ public class Agent {
     }
 
     public Agent(String name, String email, String password, 
-    		String identifier, int kind) {
+    				 String identifier, int kind) {
         this(name, email, password);
-        this.identifier = identifier;
+        this.username = identifier;
         this.kind = kind;
     }
     
     public Agent(String name, String email, String password, 
     		String identifier, int kind, double latitude, double longitude) {
     	
-    	this(name, email, password, identifier, kind);
-    	this.location = new double[2];
-    	this.location[0] = latitude;
-    	this.location[1] = longitude;
+	    	this(name, email, password, identifier, kind);
+	    	this.location = new double[2];
+	    	this.location[0] = latitude;
+	    	this.location[1] = longitude;
     }
     
     @Override
@@ -57,7 +57,7 @@ public class Agent {
 
         Agent user = (Agent) o;
 
-        return identifier.equals(user.identifier);
+        return username.equals(user.username);
 
     }
 
@@ -69,14 +69,14 @@ public class Agent {
 			builder.append(", location=").append(Arrays.toString(location));
 		builder.append(", email=").append(email);
 		builder.append(", password=").append(password);
-		builder.append(", identifier=").append(identifier);
+		builder.append(", username=").append(username);
 		builder.append(", kind=").append(kind).append("]");
 		return builder.toString();
 	}
 
 	@Override
     public int hashCode() {
-        return identifier.hashCode();
+        return username.hashCode();
     }
 
     public String getEmail() {
@@ -121,12 +121,12 @@ public class Agent {
 		this.location = location;
 	}
 
-	public String getIdentifier() {
-		return identifier;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
+	public void setUsername(String identifier) {
+		this.username = identifier;
 	}
 
 	public int getKind() {
@@ -138,7 +138,7 @@ public class Agent {
 	}
 
 	private String encryptPass(String password){
-    	JasyptEncryptor encryptor = new JasyptEncryptor();
+    		JasyptEncryptor encryptor = new JasyptEncryptor();
         return encryptor.encryptPassword(password);
     }
 }

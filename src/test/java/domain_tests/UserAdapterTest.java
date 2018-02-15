@@ -30,7 +30,7 @@ public class UserAdapterTest {
         assertEquals(info.getName(), user1.getName());
         assertEquals(info.getKind(), user1.getKind());
         assertEquals(info.getEmail(), user1.getEmail());
-        assertEquals(info.getIdentifier(), user1.getIdentifier());
+        assertEquals(info.getIdentifier(), user1.getUsername());
     }
 
     @Test

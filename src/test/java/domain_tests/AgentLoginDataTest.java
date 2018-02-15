@@ -8,8 +8,9 @@ import static org.junit.Assert.*;
 
 /**
  * Created by Nicolás on 18/02/2017.
+ * Adapted by Alejandro on 15/02/2017 (Agents).
  */
-public class UserLoginDataTest {
+public class AgentLoginDataTest {
 
     private AgentLoginData test;
 
@@ -18,6 +19,7 @@ public class UserLoginDataTest {
         test = new AgentLoginData();
         test.setLogin("hola1");
         test.setPassword("holaPassword");
+        test.setKind(2);
     }
 
     @Test
@@ -28,6 +30,11 @@ public class UserLoginDataTest {
     @Test
     public void getPassword() throws Exception {
         assertEquals("holaPassword", test.getPassword());
+    }
+    
+    @Test
+    public void getKind() throws Exception {
+    		assertEquals(2, test.getKind());
     }
 
     @Test
@@ -40,6 +47,12 @@ public class UserLoginDataTest {
     public void setPassword() throws Exception {
         test.setPassword("PASWOOOOOOOORD");
         assertEquals("PASWOOOOOOOORD", test.getPassword());
+    }
+    
+    @Test
+    public void setKind() throws Exception {
+    		test.setKind(3);
+    		assertEquals(3, test.getKind());
     }
 
 }

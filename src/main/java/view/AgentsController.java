@@ -30,16 +30,16 @@ public class AgentsController {
     //The first page shown will be login.html.
     @GetMapping(value="/")
     public String getAgentInfo(Model model) {
-        model.addAttribute("userinfo", new AgentLoginData());
+        model.addAttribute("agentinfo", new AgentLoginData());
         return "login";
     }
 
     //This method process an POST html request once fulfilled the login.html form (clicking in the "Enter" button).
     @RequestMapping(value = "/agentForm", method = RequestMethod.POST)
-    public String showInfo(Model model, @ModelAttribute AgentLoginData data, HttpSession session){
+    public String showInfo(Model model, @ModelAttribute AgentLoginData data, HttpSession session) {
         Agent agent = agentsService.getAgent(data.getLogin(), data.getPassword(), data.getKind());
-        
-        if(agent == null){
+        System.out.println(agent);
+        if(agent == null) {
             throw new UserNotFoundException();
         } else {
             AgentInfoAdapter adapter = new AgentInfoAdapter(agent);
@@ -48,8 +48,9 @@ public class AgentsController {
             model.addAttribute("name", info.getName());
             model.addAttribute("identifier", info.getIdentifier());
             model.addAttribute("email", info.getEmail());
-            model.addAttribute("user", agent);
-            session.setAttribute("user", agent);
+            model.addAttribute("kind", info.getKind());
+            model.addAttribute("agent", agent);
+            session.setAttribute("agent", agent);
             return "data";
         }
     }
@@ -60,16 +61,17 @@ public class AgentsController {
         return "changePassword";
     }
 
-    @RequestMapping(value="/userChangePassword",method = RequestMethod.POST)
+    @RequestMapping(value="/agentChangePassword",method = RequestMethod.POST)
     public String changePassword(Model model, @RequestParam String password
             , @RequestParam String newPassword
             , @RequestParam String newPasswordConfirm
-            , HttpSession session){
+            , HttpSession session) {
+    	
         JasyptEncryptor encryptor= new JasyptEncryptor();
-        Agent loggedUser = (Agent) session.getAttribute("user");
-        if(encryptor.checkPassword(password, loggedUser.getPassword()) &&
+        Agent agent = (Agent) session.getAttribute("agent");
+        if(encryptor.checkPassword(password, agent.getPassword()) &&
                 newPassword.equals(newPasswordConfirm)){
-            agentsService.updateInfo(loggedUser, newPassword);
+            agentsService.updateInfo(agent, newPassword);
             return "data";
         }
         return "changePassword";

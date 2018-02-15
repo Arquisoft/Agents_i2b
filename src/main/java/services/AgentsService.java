@@ -4,7 +4,7 @@ import domain.Agent;
 
 /**
  * Created by Nicolás on 14/02/2017.
- * Modified by Alejandro on 14/02/2018 (Agents).
+ * Adapted by Alejandro on 14/02/2018 (Agents).
  * 
  * Façade for the business layer implementation
  */
