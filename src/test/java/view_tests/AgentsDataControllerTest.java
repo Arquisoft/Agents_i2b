@@ -1,6 +1,7 @@
 package view_tests;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -12,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -70,10 +72,11 @@ public class AgentsDataControllerTest {
                 .session(session)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload.getBytes());
+
+		assertEquals(mockMvc.perform(request).andReturn().getResponse().getStatus(), HttpStatus.OK.value());
         
 		mockMvc.perform(request)
                .andDo(print())//AndDoPrint it is very usefull to see the http response and see if something went wrong.
-			   .andExpect(status().isOk()) //The state of the response must be OK. (200);
 			   .andExpect(jsonPath("$.name",is(maria.getName()))) //We can do jsonpaths in order to check that the json information displayes its ok.
                .andExpect(jsonPath("$.identifier", is(maria.getUsername())))
                .andExpect(jsonPath("$.email", is(maria.getEmail())))
@@ -89,10 +92,11 @@ public class AgentsDataControllerTest {
         MockHttpServletRequestBuilder request = post("/agent")
                 .session(session)
                 .contentType(MediaType.APPLICATION_XML_VALUE).content(payload.getBytes());
-        
+
+		assertEquals(mockMvc.perform(request).andReturn().getResponse().getStatus(), HttpStatus.OK.value());
+		
         mockMvc.perform(request)
                 .andDo(print())//AndDoPrint it is very usefull to see the http response and see if something went wrong.
-                .andExpect(status().isOk()) //The state of the response must be OK. (200);
                 .andExpect(jsonPath("$.name",is(maria.getName()))) //We can do jsonpaths in order to check that the json information displayes its ok.
                 .andExpect(jsonPath("$.identifier", is(maria.getUsername())))
                 .andExpect(jsonPath("$.email", is(maria.getEmail())))
@@ -101,13 +105,15 @@ public class AgentsDataControllerTest {
     
 	@Test
 	public void agentInterfaceInsertInfoCorect() throws Exception {
-		MockHttpServletRequestBuilder request = post("/agentForm")
-				.session(session)
-				.param("login", maria.getUsername())
-				.param("password", plainPassword)
-				.param("kind", String.valueOf(maria.getKind()));
+		MockHttpServletRequestBuilder request = post("/agentForm").session(session)
+																 .param("login", maria.getUsername())
+																 .param("password", plainPassword)
+																 .param("kind", String.valueOf(maria.getKind()));
 		
-		mockMvc.perform(request).andExpect(status().isOk());
+		assertEquals(mockMvc.perform(request)
+						    .andReturn()
+						    .getResponse()
+						    .getStatus(), HttpStatus.OK.value());
 	}
 
     @Test
@@ -116,9 +122,12 @@ public class AgentsDataControllerTest {
         MockHttpServletRequestBuilder request = post("/agent")
                 .session(session)
                 .contentType(MediaType.APPLICATION_JSON).content(payload.getBytes());
-        mockMvc.perform(request)
-                .andDo(print())                    // AndDoPrint it is very usefull to see the http response and see if something went wrong.
-                .andExpect(status().isNotFound()); // The state of the response must be OK. (200);
+        
+		assertEquals(mockMvc.perform(request)
+			    				.andDo(print())
+			    				.andReturn()
+			    				.getResponse()
+			    				.getStatus(), HttpStatus.NOT_FOUND.value());
     }
     
     @Test
@@ -129,10 +138,12 @@ public class AgentsDataControllerTest {
 		MockHttpServletRequestBuilder request = post("/agent")
 				.session(session)
 				.contentType(MediaType.APPLICATION_JSON).content(payload.getBytes());
-		mockMvc.perform(request)
-			.andDo(print())
-			.andExpect(status().isNotFound());
-    	
+
+		assertEquals(mockMvc.perform(request)
+			    			    .andDo(print())
+			    			    .andReturn()
+			    			    .getResponse()
+			    			    .getStatus(), HttpStatus.NOT_FOUND.value());
     }
     
     @Test
@@ -143,9 +154,12 @@ public class AgentsDataControllerTest {
 		MockHttpServletRequestBuilder request = post("/agent")
 				.session(session)
 				.contentType(MediaType.APPLICATION_JSON).content(payload.getBytes());
-		mockMvc.perform(request)
-			.andDo(print())
-			.andExpect(status().isNotFound());
+		
+		assertEquals(mockMvc.perform(request)
+						    .andDo(print())
+						    .andReturn()
+						    .getResponse()
+						    .getStatus(), HttpStatus.NOT_FOUND.value());
     }
 
     /**
@@ -159,9 +173,8 @@ public class AgentsDataControllerTest {
         MockHttpServletRequestBuilder request = post("/agent")
                 .session(session)
                 .contentType(MediaType.APPLICATION_JSON).content(payload.getBytes());
-        mockMvc.perform(request)
-                .andDo(print())
-                .andExpect(status().isNotFound());
+        
+		assertEquals(mockMvc.perform(request).andReturn().getResponse().getStatus(), HttpStatus.NOT_FOUND.value());
     }
 
     @Test
@@ -182,7 +195,7 @@ public class AgentsDataControllerTest {
                 .param("password", plainPassword)
                 .param("newPassword", "HOLA")
                 .param("newPasswordConfirm", "HOLA");
-        mockMvc.perform(request).andExpect(status().isOk());
+		assertEquals(mockMvc.perform(request).andReturn().getResponse().getStatus(), HttpStatus.OK.value());
 
         String payload = String.format("{\"login\":\"%s\", \"password\":\"%s\", \"kind\":\"%d\"}",
         								  maria.getUsername(), "HOLA", maria.getKind());
