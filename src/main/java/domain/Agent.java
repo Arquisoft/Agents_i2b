@@ -35,16 +35,16 @@ public class Agent {
     }
 
     public Agent(String name, String email, String password, 
-    				 String identifier, int kind) {
+    				 String username, int kind) {
         this(name, email, password);
-        this.username = identifier;
+        this.username = username;
         this.kind = kind;
     }
     
     public Agent(String name, String email, String password, 
-    		String identifier, int kind, double latitude, double longitude) {
+    		String username, int kind, double latitude, double longitude) {
     	
-	    	this(name, email, password, identifier, kind);
+	    	this(name, email, password, username, kind);
 	    	this.location = new double[2];
 	    	this.location[0] = latitude;
 	    	this.location[1] = longitude;
@@ -125,8 +125,8 @@ public class Agent {
 		return username;
 	}
 
-	public void setUsername(String identifier) {
-		this.username = identifier;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public int getKind() {

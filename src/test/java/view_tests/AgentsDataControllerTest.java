@@ -112,7 +112,7 @@ public class AgentsDataControllerTest {
 
     @Test
     public void testForNotFound() throws Exception{
-        String payload = String.format("{\"login\":\"%s\", \"password\":\"%s\"}", "Nothing", "Not really");
+        String payload = String.format("{\"login\":\"%s\", \"password\":\"%s\", \"kind\": \"%d\"}", "Nothing", "Not really", 1111);
         MockHttpServletRequestBuilder request = post("/agent")
                 .session(session)
                 .contentType(MediaType.APPLICATION_JSON).content(payload.getBytes());
@@ -123,12 +123,29 @@ public class AgentsDataControllerTest {
     
     @Test
     public void testForIncorrectKind() throws Exception {
+        String payload = String.format("{\"login\":\"%s\", \"password\":\"%s\", \"kind\": \"%d\"}",
+				  maria.getUsername(), maria.getPassword(), maria.getKind() + 1);
+
+		MockHttpServletRequestBuilder request = post("/agent")
+				.session(session)
+				.contentType(MediaType.APPLICATION_JSON).content(payload.getBytes());
+		mockMvc.perform(request)
+			.andDo(print())
+			.andExpect(status().isNotFound());
     	
     }
     
     @Test
     public void testForIncorrectUsername() throws Exception {
-    	
+        String payload = String.format("{\"login\":\"%s\", \"password\":\"%s\", \"kind\": \"%d\"}",
+				  "Heung Min Son", maria.getPassword(), maria.getKind());
+
+		MockHttpServletRequestBuilder request = post("/agent")
+				.session(session)
+				.contentType(MediaType.APPLICATION_JSON).content(payload.getBytes());
+		mockMvc.perform(request)
+			.andDo(print())
+			.andExpect(status().isNotFound());
     }
 
     /**
