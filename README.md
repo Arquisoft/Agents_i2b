@@ -1,11 +1,11 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0a5332a696ea4b06aa9f43a39f3f21f0)](https://www.codacy.com/app/jelabra/Agents_i2b?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/participants_i2b&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0a5332a696ea4b06aa9f43a39f3f21f0)](https://www.codacy.com/app/jelabra/Agents_i2b?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Arquisoft/Agents_i2b&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/Arquisoft/Agents_i2b.svg?branch=master)](https://travis-ci.org/Arquisoft/Agents_i2b)
 [![codecov](https://codecov.io/gh/Arquisoft/Agents_i2b/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/Agents_i2b)
 
 
 # Agents_i2b
 
-Skeleton of participants module
+Skeleton of agents module
 
 # Current Authors (2017-2018)
 - Jose Emilio Labra Gayo (@labra)
