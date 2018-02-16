@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import dbmanagement.Database;
-import dbmanagement.AgentsRepository;
 import domain.Agent;
 import domain.AgentInfo;
 import domain.AgentInfoAdapter;
 import main.Application;
+import repositories.AgentsRepository;
+import repositories.Database;
 import util.JasyptEncryptor;
 
 /**

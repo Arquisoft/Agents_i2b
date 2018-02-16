@@ -1,7 +1,8 @@
 package services;
 
-import dbmanagement.Database;
 import domain.Agent;
+import repositories.Database;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import util.JasyptEncryptor;

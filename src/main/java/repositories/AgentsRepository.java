@@ -1,4 +1,4 @@
-package dbmanagement;
+package repositories;
 
 import domain.Agent;
 import org.bson.types.ObjectId;
