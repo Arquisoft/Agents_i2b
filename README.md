@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/Arquisoft/Agents_i2b/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/Agents_i2b)
 
 
-# participants_i2b
+# Agents_i2b
 
 Skeleton of participants module
 
@@ -34,7 +34,7 @@ In order to use the user credentials to obtain your data, you can send a POST re
 data in this request can come as:
  - JSON:
 ```json
-{"login":"yourLogin", "password":"yourpassword"}
+{"login":"yourLogin", "password":"yourpassword", "kind":"agentKind"}
 ```
 
 - XML:
@@ -42,30 +42,33 @@ data in this request can come as:
 <data>
  <login>yourLogin</login>
  <password>yourPassword</password>
+ <agent>agentKind</kind>
 </data>
 ```
 
 ## Tests
 To run the tests just use `mvn test`. No data in the database is needed to run them. But if you want to test the
-user interface manually you'll have to introduce this document:
+agent interface manually you'll have to introduce this document:
 
 ```json
 {
-    "_id" : ObjectId("58a8670df086e81dc034d7fc"),
-    "firstName" : "Prueba01",
-    "lastName" : "Apellido01",
-    "email" : "prueba01@prueba.es",
-    "address" : "c/Prueba n0 1a",
-    "nationality" : "España",
-    "userId" : "00000001J",
-    "dateOfBirth" : ISODate("1981-12-27T23:00:00.000Z"),
-    "password" : "khZZwjdhWwVbMdmOvz9eqBfKR1N6A+CdFBDM9c1dQduUnGewQyPRlBxB4Q6wT7Cq"
+   "_id" : ObjectId("58a8670df086e81dc034d7fc"),
+   "name" : "Paco",
+   "email" : "paco@naver.co.kr",
+   "location" : [
+      157,
+      256
+   ],
+   "kind" : 1,
+   "username" : "pruebas",
+   "password" : "khZZwjdhWwVbMdmOvz9eqBfKR1N6A+CdFBDM9c1dQduUnGewQyPRlBxB4Q6wT7Cq"
 }
 ```
 
 And as data use:
- - login: prueba01@prueba.es
+ - login: pruebas
  - password: 4[[j[frVCUMJ>hU
+ - kind: 1
 
  If you have the data and the database running and the application still reports a 404 Not Found when it shouldn't
  try deleting the document and adding it again.
