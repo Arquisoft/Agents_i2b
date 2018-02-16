@@ -14,7 +14,7 @@ public class AgentInfoAdapter {
 
     private Agent user;
     
-	MasterFileParser parser = new CSVFileParser();
+	private MasterFileParser parser = new CSVFileParser();
 
     public AgentInfoAdapter(Agent user) {
         this.user = user;

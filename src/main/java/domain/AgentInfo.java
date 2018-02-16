@@ -43,42 +43,20 @@ public class AgentInfo implements Serializable{
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public double[] getLocation() {
 		return location;
-	}
-
-	public void setLocation(double[] coordinates) {
-		if (location==null)
-			this.location = new double[2];
-		this.location = coordinates;
 	}
 
 	public String getIdentifier() {
 		return identifier;
 	}
 
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
-	}
-
 	public int getKind() {
 		return kindCode;
 	}
 
-	public void setKind(int kind) {
-		this.kindCode = kind;
-	}
-
 	public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 	
     public String getKindName() {
@@ -107,20 +85,15 @@ public class AgentInfo implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		
+		
 		AgentInfo other = (AgentInfo) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (identifier == null) {
-			if (other.identifier != null)
+		if (identifier == null && other.identifier != null) {
 				return false;
 		} else if (!identifier.equals(other.identifier))
 			return false;
-		if (kindCode != other.kindCode)
-			return false;
-		return true;
+		
+		return kindCode == other.kindCode;
 	}
 
 	@Override

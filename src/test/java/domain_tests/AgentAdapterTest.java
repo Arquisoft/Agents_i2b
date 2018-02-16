@@ -1,6 +1,8 @@
 package domain_tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +18,13 @@ public class AgentAdapterTest {
 
     private Agent user1;
     private Agent user2;
+    private Agent user3;
 
     @Before
     public void setUp(){
         user1 = new Agent("User1", "User1@hola.com", "user1Password", "112233", 1);
         user2 = new Agent("User2", "User2@hola.com", "user2Password", "4455566", 2);
+        user3 = new Agent("User3", "User2@hola.com", "user2Password", "4455566", 2);
     }
 
     @Test
@@ -43,6 +47,23 @@ public class AgentAdapterTest {
         String test = "AgentInfo{name='User2', location='[]', identifier='4455566', " +
                 		  "email='User2@hola.com', kindCode='2', kind='Sensor'}";
         assertEquals(toString, test);
+    }
+    
+    @Test
+    public void testInfoEquals() {
+        AgentInfoAdapter adapter1 = new AgentInfoAdapter(user1);
+        AgentInfoAdapter adapter2 = new AgentInfoAdapter(user2);
+        AgentInfoAdapter adapter3 = new AgentInfoAdapter(user3);
+        
+        AgentInfo info1 = adapter1.agentToInfo();
+        AgentInfo info2 = adapter2.agentToInfo();
+        AgentInfo info3 = adapter3.agentToInfo();
+        
+        assertFalse(info1.equals(info2));
+        assertFalse(info1.equals(null));
+        assertTrue(info2.equals(info3));
+        info1 = info3;
+        assertTrue(info1.equals(info3));
     }
 
 }

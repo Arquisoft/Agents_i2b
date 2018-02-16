@@ -12,7 +12,7 @@ import repositories.CSVFileParser;
 
 public class CSVParserTest {
 	
-	CSVFileParser parser;
+	private CSVFileParser parser;
 	
 	@Test
 	public void getKindNameTest() throws FileNotFoundException, IOException {
@@ -41,7 +41,7 @@ public class CSVParserTest {
 			parser.getKindNameOf(1);
 			assertTrue(false);
 		} catch (FileNotFoundException fnfe) {
-			assertTrue(true);
+			// should throw this
 		} catch (IOException e) {
 			assertTrue(false);
 		}
@@ -50,7 +50,7 @@ public class CSVParserTest {
 			parser.getKindCodeOf("Person");
 			assertTrue(false);
 		} catch (FileNotFoundException fnfe) {
-			assertTrue(true);
+			// should throw this
 		} catch (IOException e) {
 			assertTrue(false);
 		}
