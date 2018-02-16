@@ -13,10 +13,12 @@ import static org.junit.Assert.*;
 public class AgentLoginDataTest {
 
     private AgentLoginData test;
+    private AgentLoginData test2;
 
     @Before
     public void setUp() {
         test = new AgentLoginData();
+        test2 = new AgentLoginData("hola1", "holaPassword", 2);
         test.setLogin("hola1");
         test.setPassword("holaPassword");
         test.setKind(2);
@@ -30,11 +32,13 @@ public class AgentLoginDataTest {
     @Test
     public void getPassword() throws Exception {
         assertEquals("holaPassword", test.getPassword());
+        assertEquals("holaPassword", test2.getPassword());
     }
     
     @Test
     public void getKind() throws Exception {
     		assertEquals(2, test.getKind());
+    		assertEquals(2, test2.getKind());
     }
 
     @Test

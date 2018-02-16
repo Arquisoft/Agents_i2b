@@ -2,6 +2,7 @@ package domain_tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -24,7 +25,7 @@ public class AgentAdapterTest {
     public void setUp(){
         user1 = new Agent("User1", "User1@hola.com", "user1Password", "112233", 1);
         user2 = new Agent("User2", "User2@hola.com", "user2Password", "4455566", 2);
-        user3 = new Agent("User3", "User2@hola.com", "user2Password", "4455566", 2);
+        user3 = new Agent("User3", "User2@hola.com", "user2Password", "4455566", 2, 156, 168);
     }
 
     @Test
@@ -60,10 +61,13 @@ public class AgentAdapterTest {
         AgentInfo info3 = adapter3.agentToInfo();
         
         assertFalse(info1.equals(info2));
-        assertFalse(info1.equals(null));
+        assertFalse(info1 == null);
+        assertNotEquals(info1.hashCode(), info3.hashCode());
         assertTrue(info2.equals(info3));
         info1 = info3;
         assertTrue(info1.equals(info3));
+        
+        assertEquals(info2.hashCode(), info3.hashCode());
     }
 
 }

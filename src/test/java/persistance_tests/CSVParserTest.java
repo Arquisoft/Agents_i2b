@@ -1,7 +1,7 @@
 package persistance_tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,20 +39,20 @@ public class CSVParserTest {
 		parser = new CSVFileParser("src/test/not_a_file.csv");
 		try {
 			parser.getKindNameOf(1);
-			assertTrue(false);
+			fail();
 		} catch (FileNotFoundException fnfe) {
 			// should throw this
 		} catch (IOException e) {
-			assertTrue(false);
+			fail();
 		}
 		
 		try {
 			parser.getKindCodeOf("Person");
-			assertTrue(false);
+			fail();
 		} catch (FileNotFoundException fnfe) {
 			// should throw this
 		} catch (IOException e) {
-			assertTrue(false);
+			fail();
 		}
 	}
 
