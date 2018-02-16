@@ -38,7 +38,7 @@ public class DatabaseTest {
 	public void setUp() {
 		testedUser = new Agent("Luis Gracia", "LGracia@gmail.com", "Luis123", "147986", 12);
 		repo.insert(testedUser);
-
+		
 		testedUser2 = new Agent("Maria MamaMia", "asd", "pass14753", "363636H", 25);
 		repo.insert(testedUser2);
 	}
@@ -85,7 +85,7 @@ public class DatabaseTest {
 
 		AgentInfoAdapter userAdapter = new AgentInfoAdapter(user);
 
-		AgentInfo userInfo = userAdapter.userToInfo();
+		AgentInfo userInfo = userAdapter.agentToInfo();
 
 		Assert.assertEquals(user.getName(), userInfo.getName());
 		Assert.assertEquals(user.getKind(), userInfo.getKind());

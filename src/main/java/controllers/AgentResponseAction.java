@@ -24,6 +24,6 @@ public class AgentResponseAction {
         Agent user = agentsService.getAgent(info.getLogin(), info.getPassword(), info.getKind());
         AgentInfoAdapter data = new AgentInfoAdapter(user);
         return user == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) 
-        					   : new ResponseEntity<>(data.userToInfo(), HttpStatus.OK);
+        					    : new ResponseEntity<>(data.agentToInfo(), HttpStatus.OK);
     }
 }

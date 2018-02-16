@@ -1,4 +1,4 @@
-package util;
+package repositories;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,6 +7,7 @@ import java.io.Reader;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.stereotype.Repository;
 
 /**
  * This class is in charge of parsing the master csv file
@@ -18,7 +19,8 @@ import org.apache.commons.csv.CSVRecord;
  * @author Alejandro González Hevia
  *
  */
-public class MasterFileParser {
+@Repository
+public class CSVFileParser implements MasterFileParser {
 	
 	private final static String MASTER_FILE_PATH = "master.csv";
 

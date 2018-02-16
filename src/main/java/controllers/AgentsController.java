@@ -44,12 +44,14 @@ public class AgentsController {
             throw new AgentNotFoundException();
         } else {
             AgentInfoAdapter adapter = new AgentInfoAdapter(agent);
-            AgentInfo info = adapter.userToInfo();
+            AgentInfo info = adapter.agentToInfo();
             
             model.addAttribute("name", info.getName());
             model.addAttribute("identifier", info.getIdentifier());
+            model.addAttribute("location", info.getLocation());
             model.addAttribute("email", info.getEmail());
             model.addAttribute("kind", info.getKind());
+            model.addAttribute("kindName", info.getKindName());
             model.addAttribute("agent", agent);
             session.setAttribute("agent", agent);
             return "data";

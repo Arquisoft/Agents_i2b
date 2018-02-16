@@ -7,7 +7,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import util.JasyptEncryptor;
-import util.MasterFileParser;
 
 /**
  * Created by Damian on 06/02/2017.
@@ -142,9 +141,4 @@ public class Agent {
     		JasyptEncryptor encryptor = new JasyptEncryptor();
         return encryptor.encryptPassword(password);
     }
-
-	public String getKindName() {
-		MasterFileParser masterFileParser = new MasterFileParser();
-		return masterFileParser.getKindNameOf(this.kind);
-	}
 }
