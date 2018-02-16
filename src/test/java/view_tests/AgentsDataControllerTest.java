@@ -22,9 +22,9 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import dbmanagement.AgentsRepository;
 import domain.Agent;
 import main.Application;
+import repositories.AgentsRepository;
 
 @SpringBootTest(classes ={Application.class})
 @RunWith(SpringJUnit4ClassRunner.class)

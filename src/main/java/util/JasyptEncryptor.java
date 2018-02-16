@@ -15,7 +15,6 @@ public class JasyptEncryptor {
 
     public String encryptPassword(String password){
         String pass = encryptor.encryptPassword(password);
-        System.out.println(pass);
         return pass;
     }
 }

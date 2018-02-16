@@ -1,4 +1,4 @@
-package database_tests;
+package persistance_tests;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import dbmanagement.Database;
-import dbmanagement.AgentsRepository;
 import domain.Agent;
 import domain.AgentInfo;
 import domain.AgentInfoAdapter;
 import main.Application;
+import repositories.AgentsRepository;
+import repositories.Database;
 import util.JasyptEncryptor;
 
 /**
@@ -38,7 +38,7 @@ public class DatabaseTest {
 	public void setUp() {
 		testedUser = new Agent("Luis Gracia", "LGracia@gmail.com", "Luis123", "147986", 12);
 		repo.insert(testedUser);
-
+		
 		testedUser2 = new Agent("Maria MamaMia", "asd", "pass14753", "363636H", 25);
 		repo.insert(testedUser2);
 	}
@@ -85,7 +85,7 @@ public class DatabaseTest {
 
 		AgentInfoAdapter userAdapter = new AgentInfoAdapter(user);
 
-		AgentInfo userInfo = userAdapter.userToInfo();
+		AgentInfo userInfo = userAdapter.agentToInfo();
 
 		Assert.assertEquals(user.getName(), userInfo.getName());
 		Assert.assertEquals(user.getKind(), userInfo.getKind());

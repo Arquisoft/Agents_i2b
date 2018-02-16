@@ -68,7 +68,6 @@ public class Agent {
 		if (location!=null)
 			builder.append(", location=").append(Arrays.toString(location));
 		builder.append(", email=").append(email);
-		builder.append(", password=").append(password);
 		builder.append(", username=").append(username);
 		builder.append(", kind=").append(kind).append("]");
 		return builder.toString();

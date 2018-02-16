@@ -38,18 +38,20 @@ public class AgentsController {
     //This method process an POST html request once fulfilled the login.html form (clicking in the "Enter" button).
     @RequestMapping(value = "/agentForm", method = RequestMethod.POST)
     public String showInfo(Model model, @ModelAttribute AgentLoginData data, HttpSession session) {
+        System.out.println(data.getPassword());
         Agent agent = agentsService.getAgent(data.getLogin(), data.getPassword(), data.getKind());
-        System.out.println(agent);
         if(agent == null) {
             throw new AgentNotFoundException();
         } else {
             AgentInfoAdapter adapter = new AgentInfoAdapter(agent);
-            AgentInfo info = adapter.userToInfo();
+            AgentInfo info = adapter.agentToInfo();
             
             model.addAttribute("name", info.getName());
             model.addAttribute("identifier", info.getIdentifier());
+            model.addAttribute("location", info.getLocation());
             model.addAttribute("email", info.getEmail());
             model.addAttribute("kind", info.getKind());
+            model.addAttribute("kindName", info.getKindName());
             model.addAttribute("agent", agent);
             session.setAttribute("agent", agent);
             return "data";

@@ -106,4 +106,12 @@ public class AgentTest {
 	    	Assert.assertTrue(25.5 == nico.getLocation()[0]);
 	    	Assert.assertTrue(185 == nico.getLocation()[1]);
     }
+    
+    @Test
+    public void toStringTest() {
+    		Assert.assertEquals("Agent [id=null, name=Nicolás Rivero, email=nico@nicomail.com, "
+    				+ "username=null, kind=0]", nico.toString());
+    		Assert.assertEquals("Agent [id=null, name=Carmen, location=[20.48, 156.2], "
+    				+ "email=c@c.com, username=181818S, kind=18]", carmen.toString());
+    }
 }
