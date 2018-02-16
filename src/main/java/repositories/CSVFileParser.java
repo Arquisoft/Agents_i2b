@@ -22,13 +22,21 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CSVFileParser implements MasterFileParser {
 	
-	private final static String MASTER_FILE_PATH = "master.csv";
+	private String filePath;
+	
+	public CSVFileParser() {
+		this.filePath = "master.csv";
+	}
+	
+	public CSVFileParser(String filePath) {
+		this.filePath = filePath;
+	}
 
-	public String getKindNameOf(int kind) {
+	public String getKindNameOf(int kind) throws FileNotFoundException, IOException {
 		Reader reader = null;
 		
         try {
-	        	reader = new FileReader(MASTER_FILE_PATH);
+	        	reader = new FileReader(filePath);
 	        	Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(reader);
 	        	for (CSVRecord record : records) {
 	        		this.assertValidRecord(record);
@@ -36,10 +44,6 @@ public class CSVFileParser implements MasterFileParser {
 	        	    int kindCode = Integer.valueOf(record.get(0));
 	        	    if (kindCode == kind) return record.get(1);
 	        	}
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             if (reader != null) { try { reader.close(); } catch (IOException e) { e.printStackTrace(); } }
         }
@@ -47,22 +51,20 @@ public class CSVFileParser implements MasterFileParser {
 		return null;
 	}
 
-	public int getKindCodeOf(String kindName) {
+	public int getKindCodeOf(String kindName) throws FileNotFoundException, IOException {
+		if (kindName == null) return -1;
+		
 		Reader reader = null;
 		
         try {
-	        	reader = new FileReader(MASTER_FILE_PATH);
+	        	reader = new FileReader(filePath);
 	        	Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(reader);
 	        	for (CSVRecord record : records) {
 	        		this.assertValidRecord(record);
 	        		
-	        	    String name = record.get(0);
+	        	    String name = record.get(1);
 	        	    if (kindName.equals(name)) return Integer.valueOf(record.get(0));
 	        	}
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             if (reader != null) { try { reader.close(); } catch (IOException e) { e.printStackTrace(); } }
         }

@@ -1,4 +1,4 @@
-package database_tests;
+package persistance_tests;
 
 import org.junit.After;
 import org.junit.Assert;

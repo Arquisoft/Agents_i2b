@@ -22,7 +22,12 @@ public class AgentInfoAdapter {
 
     public AgentInfo agentToInfo() {
     		int kindCode = user.getKind();
-    		String kindName = parser.getKindNameOf(kindCode);
+    		String kindName;
+    		try {
+			kindName = parser.getKindNameOf(kindCode);
+		} catch (Exception e) {
+			return null;
+		}
     		
 	    	if (user.getLocation() != null) {
 	    		return new AgentInfo(user.getName(), user.getLocation()[0],
