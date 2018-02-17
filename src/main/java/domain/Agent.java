@@ -6,6 +6,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import repositories.CSVFileParser;
+import repositories.MasterFileParser;
 import util.JasyptEncryptor;
 
 /**
@@ -134,6 +136,15 @@ public class Agent {
 
 	public void setKind(int kind) {
 		this.kind = kind;
+	}
+	
+	public String getKindName() {
+		MasterFileParser parser = new CSVFileParser();
+		try {	
+			return parser.getKindNameOf(this.kind);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	private String encryptPass(String password){

@@ -1,12 +1,17 @@
 package controllers;
 
 
-import domain.AgentInfo;
-import domain.AgentLoginData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import domain.Agent;
+import domain.AgentLoginData;
 import services.AgentsService;
 
 /**
@@ -30,7 +35,7 @@ public class AgentsDataController {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<AgentInfo> userOkJSON(@RequestBody AgentLoginData info){
+    public ResponseEntity<Agent> userOkJSON(@RequestBody AgentLoginData info){
         AgentResponseAction act = new AgentResponseAction(part);
         return act.execute(info);
     }

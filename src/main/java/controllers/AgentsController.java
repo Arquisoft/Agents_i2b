@@ -1,18 +1,20 @@
 package controllers;
 
-import domain.Agent;
-import domain.AgentInfo;
-import domain.AgentInfoAdapter;
-import domain.AgentLoginData;
-import org.springframework.web.bind.annotation.*;
-import services.AgentsService;
-import util.JasyptEncryptor;
-import util.exception.AgentNotFoundException;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
+import domain.Agent;
+import domain.AgentLoginData;
+import services.AgentsService;
+import util.JasyptEncryptor;
+import util.exception.AgentNotFoundException;
 
 
 /**
@@ -38,20 +40,10 @@ public class AgentsController {
     //This method process an POST html request once fulfilled the login.html form (clicking in the "Enter" button).
     @RequestMapping(value = "/agentForm", method = RequestMethod.POST)
     public String showInfo(Model model, @ModelAttribute AgentLoginData data, HttpSession session) {
-        System.out.println(data.getPassword());
         Agent agent = agentsService.getAgent(data.getLogin(), data.getPassword(), data.getKind());
         if(agent == null) {
             throw new AgentNotFoundException();
         } else {
-            AgentInfoAdapter adapter = new AgentInfoAdapter(agent);
-            AgentInfo info = adapter.agentToInfo();
-            
-            model.addAttribute("name", info.getName());
-            model.addAttribute("identifier", info.getIdentifier());
-            model.addAttribute("location", info.getLocation());
-            model.addAttribute("email", info.getEmail());
-            model.addAttribute("kind", info.getKind());
-            model.addAttribute("kindName", info.getKindName());
             model.addAttribute("agent", agent);
             session.setAttribute("agent", agent);
             return "data";
