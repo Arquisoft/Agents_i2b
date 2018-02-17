@@ -129,7 +129,7 @@ public class AgentsDataControllerTest {
 			    				.andDo(print())
 			    				.andReturn()
 			    				.getResponse()
-			    				.getStatus(), HttpStatus.UNAUTHORIZED.value());
+			    				.getStatus(), HttpStatus.NOT_FOUND.value());
     }
     
     @Test
@@ -145,7 +145,7 @@ public class AgentsDataControllerTest {
 			    			    .andDo(print())
 			    			    .andReturn()
 			    			    .getResponse()
-			    			    .getStatus(), HttpStatus.UNAUTHORIZED.value());
+			    			    .getStatus(), HttpStatus.NOT_FOUND.value());
     }
     
     @Test
@@ -161,7 +161,7 @@ public class AgentsDataControllerTest {
 						    .andDo(print())
 						    .andReturn()
 						    .getResponse()
-						    .getStatus(), HttpStatus.UNAUTHORIZED.value());
+						    .getStatus(), HttpStatus.NOT_FOUND.value());
     }
 
     /**
@@ -176,7 +176,7 @@ public class AgentsDataControllerTest {
                 .session(session)
                 .contentType(MediaType.APPLICATION_JSON).content(payload.getBytes());
         
-		assertEquals(mockMvc.perform(request).andReturn().getResponse().getStatus(), HttpStatus.UNAUTHORIZED.value());
+		assertEquals(mockMvc.perform(request).andReturn().getResponse().getStatus(), HttpStatus.NOT_FOUND.value());
     }
 
     @Test
