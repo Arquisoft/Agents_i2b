@@ -78,9 +78,10 @@ public class AgentsDataControllerTest {
 		mockMvc.perform(request)
                .andDo(print())//AndDoPrint it is very usefull to see the http response and see if something went wrong.
 			   .andExpect(jsonPath("$.name",is(maria.getName()))) //We can do jsonpaths in order to check that the json information displayes its ok.
-               .andExpect(jsonPath("$.identifier", is(maria.getUsername())))
+               .andExpect(jsonPath("$.username", is(maria.getUsername())))
                .andExpect(jsonPath("$.email", is(maria.getEmail())))
-               .andExpect(jsonPath("$.kind", is(maria.getKind())));
+               .andExpect(jsonPath("$.kind", is(maria.getKind())))
+               .andExpect(jsonPath("$.kindName", is(maria.getKindName())));
 	}
     
     @Test
@@ -98,9 +99,10 @@ public class AgentsDataControllerTest {
         mockMvc.perform(request)
                 .andDo(print())//AndDoPrint it is very usefull to see the http response and see if something went wrong.
                 .andExpect(jsonPath("$.name",is(maria.getName()))) //We can do jsonpaths in order to check that the json information displayes its ok.
-                .andExpect(jsonPath("$.identifier", is(maria.getUsername())))
+                .andExpect(jsonPath("$.username", is(maria.getUsername())))
                 .andExpect(jsonPath("$.email", is(maria.getEmail())))
-                .andExpect(jsonPath("$.kind", is(maria.getKind())));
+                .andExpect(jsonPath("$.kind", is(maria.getKind())))
+                .andExpect(jsonPath("$.kindName", is(maria.getKindName())));
     }
     
 	@Test
@@ -208,9 +210,10 @@ public class AgentsDataControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name",is(maria.getName())))
-                .andExpect(jsonPath("$.identifier", is(maria.getUsername())))
+                .andExpect(jsonPath("$.username", is(maria.getUsername())))
                 .andExpect(jsonPath("$.email", is(maria.getEmail())))
-                .andExpect(jsonPath("$.kind", is(maria.getKind())));
+                .andExpect(jsonPath("$.kind", is(maria.getKind())))
+                .andExpect(jsonPath("$.kindName", is(maria.getKindName())));
     }
     
 }

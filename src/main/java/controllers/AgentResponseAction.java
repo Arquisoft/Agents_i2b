@@ -1,11 +1,10 @@
 package controllers;
 
-import domain.Agent;
-import domain.AgentInfo;
-import domain.AgentInfoAdapter;
-import domain.AgentLoginData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import domain.Agent;
+import domain.AgentLoginData;
 import services.AgentsService;
 
 /**
@@ -20,10 +19,9 @@ public class AgentResponseAction {
         this.agentsService = part;
     }
 
-    public ResponseEntity<AgentInfo> execute(AgentLoginData info){
-        Agent user = agentsService.getAgent(info.getLogin(), info.getPassword(), info.getKind());
-        AgentInfoAdapter data = new AgentInfoAdapter(user);
-        return user == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) 
-        					    : new ResponseEntity<>(data.agentToInfo(), HttpStatus.OK);
+    public ResponseEntity<Agent> execute(AgentLoginData info){
+        Agent agent = agentsService.getAgent(info.getLogin(), info.getPassword(), info.getKind());
+        return agent == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) 
+        					    : new ResponseEntity<>(agent, HttpStatus.OK);
     }
 }

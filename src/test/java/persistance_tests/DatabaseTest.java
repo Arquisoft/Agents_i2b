@@ -10,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import domain.Agent;
-import domain.AgentInfo;
-import domain.AgentInfoAdapter;
 import main.Application;
 import repositories.AgentsRepository;
 import repositories.Database;
@@ -76,21 +74,12 @@ public class DatabaseTest {
 	}
 
 	@Test
-	public void testUpdateInfoAndAdaptation() {
+	public void testUpdateInfo() {
 		Agent user = dat.getAgent("363636H");
 		Assert.assertEquals("Maria MamaMia", user.getName());
 		Assert.assertEquals(25, user.getKind());
 		Assert.assertEquals("363636H", user.getUsername());
 		Assert.assertEquals("asd", user.getEmail());
-
-		AgentInfoAdapter userAdapter = new AgentInfoAdapter(user);
-
-		AgentInfo userInfo = userAdapter.agentToInfo();
-
-		Assert.assertEquals(user.getName(), userInfo.getName());
-		Assert.assertEquals(user.getKind(), userInfo.getKind());
-		Assert.assertEquals(user.getEmail(), userInfo.getEmail());
-		Assert.assertEquals(user.getUsername(), userInfo.getIdentifier());
 
 		user.setName("Pepa Trump");
 
