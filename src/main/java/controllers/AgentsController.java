@@ -67,6 +67,8 @@ public class AgentsController {
         if(encryptor.checkPassword(password, agent.getPassword()) &&
                 newPassword.equals(newPasswordConfirm)){
             agentsService.updateInfo(agent, newPassword);
+            session.setAttribute("agent", agent);
+            model.addAttribute("agent", agent);
             return "data";
         }
         return "changePassword";
