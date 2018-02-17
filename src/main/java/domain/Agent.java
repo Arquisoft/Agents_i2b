@@ -30,7 +30,8 @@ public class Agent {
 
     Agent(){ }
 
-    public Agent(String name, String email, String password) {
+    //Private constructor, no agent should be created without a username
+    private Agent(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = encryptPass(password); 

@@ -19,7 +19,7 @@ public class AgentTest {
 
     @Before
     public void setUp() {
-        nico = new Agent("Nicolás Rivero", "nico@nicomail.com","nico123");
+        nico = new Agent("Nicolás Rivero", "nico@nicomail.com","nico123", "usernameNico", 0);
         jorge = new Agent("Jorge Zapatero", "jorge@jorgemail.com", "jorge123", "111111111A", 1);
         damian = new Agent("Damian Rubio", "damian@damianmail.com", "damian123", "222222222B", 2);
         carmen = new Agent("Carmen", "c@c.com", "cccc", "181818S", 18, 20.48, 156.2);
@@ -68,8 +68,8 @@ public class AgentTest {
     }
 
     @Test
-    public void nifTest(){
-        Assert.assertEquals(null, nico.getUsername());
+    public void usernameTest(){
+        Assert.assertEquals("usernameNico", nico.getUsername());
         Assert.assertEquals("111111111A", jorge.getUsername());
         Assert.assertEquals("222222222B", damian.getUsername());
         Assert.assertEquals("181818S", carmen.getUsername());
@@ -110,8 +110,19 @@ public class AgentTest {
     @Test
     public void toStringTest() {
     		Assert.assertEquals("Agent [id=null, name=Nicolás Rivero, email=nico@nicomail.com, "
-    				+ "username=null, kind=0]", nico.toString());
+    				+ "username=usernameNico, kind=0]", nico.toString());
     		Assert.assertEquals("Agent [id=null, name=Carmen, location=[20.48, 156.2], "
     				+ "email=c@c.com, username=181818S, kind=18]", carmen.toString());
+    }
+    
+    @Test
+    public void hashEqualityTest() {
+    	Assert.assertEquals(carmen.getUsername().hashCode(), carmen.hashCode());
+    	
+    	nico.setUsername("181818S");
+    	Assert.assertEquals(nico.getUsername().hashCode(), nico.hashCode());
+    	
+    	Assert.assertTrue(carmen.equals(nico));
+    	Assert.assertFalse(carmen.equals(jorge));
     }
 }

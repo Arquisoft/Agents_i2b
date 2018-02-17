@@ -55,5 +55,18 @@ public class CSVParserTest {
 			fail();
 		}
 	}
+	
+	@Test(expected = AssertionError.class)
+	public void wrongFormatTest() {
+		parser = new CSVFileParser("src/test/wrongFile.csv");
+		
+			try {
+				parser.getKindNameOf(1);
+			} catch (IOException e) {
+				fail();
+			}
+			fail();
+		 
+	}
 
 }
