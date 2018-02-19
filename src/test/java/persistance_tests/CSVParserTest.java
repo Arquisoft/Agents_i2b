@@ -56,6 +56,15 @@ public class CSVParserTest {
 		} catch (IOException e) {
 			fail();
 		}
+		
+		try {
+			parser.getKindNames();
+			fail();
+		} catch (FileNotFoundException fnfe) {
+			// should throw this
+		} catch (IOException e) {
+			fail();
+		}
 	}
 	
 	@Test(expected = AssertionError.class)
@@ -69,6 +78,7 @@ public class CSVParserTest {
 		fail();
 	}
 	
+	@Test
 	public void getKindNamesTest() throws IOException {
 		parser = new CSVFileParser("src/test/master_test.csv");
 		List<String> kindNames = parser.getKindNames();

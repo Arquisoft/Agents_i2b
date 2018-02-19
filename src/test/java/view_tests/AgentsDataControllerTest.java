@@ -2,10 +2,14 @@ package view_tests;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -106,7 +110,7 @@ public class AgentsDataControllerTest {
     }
     
 	@Test
-	public void agentInterfaceInsertInfoCorect() throws Exception {
+	public void agentInterfaceInsertInfoCorrect() throws Exception {
 		MockHttpServletRequestBuilder request = post("/agentForm").session(session)
 																 .param("login", maria.getUsername())
 																 .param("password", plainPassword)
@@ -116,6 +120,19 @@ public class AgentsDataControllerTest {
 						    .andReturn()
 						    .getResponse()
 						    .getStatus(), HttpStatus.OK.value());
+	}
+    
+	@Test
+	public void agentInterfaceInsertInfoIncorrect() throws Exception {
+		MockHttpServletRequestBuilder request = post("/agentForm").session(session)
+																 .param("login", "Coco")
+																 .param("password", plainPassword)
+																 .param("kind", maria.getKind());
+		
+		assertEquals(mockMvc.perform(request)
+						    .andReturn()
+						    .getResponse()
+						    .getStatus(), HttpStatus.NOT_FOUND.value());
 	}
 
     @Test
@@ -214,6 +231,15 @@ public class AgentsDataControllerTest {
                 .andExpect(jsonPath("$.email", is(maria.getEmail())))
                 .andExpect(jsonPath("$.kindCode", is(maria.getKindCode())))
                 .andExpect(jsonPath("$.kind", is(maria.getKind())));
+    }
+    
+    @Test
+    public void loginTest() throws Exception {
+    		MockHttpServletRequestBuilder request = get("/");
+    		assertEquals(HttpStatus.OK.value(), mockMvc.perform(request).andReturn().getResponse().getStatus());
+    		Map<String, Object> model = mockMvc.perform(request).andReturn().getModelAndView().getModel();
+    		assertTrue(model.containsKey("agentinfo"));
+    		assertTrue(model.containsKey("kindNames"));
     }
     
 }
