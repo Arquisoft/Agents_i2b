@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -32,8 +34,9 @@ public class AgentsController {
 
     //The first page shown will be login.html.
     @GetMapping(value="/")
-    public String getAgentInfo(Model model) {
+    public String getAgentInfo(Model model) throws IOException {
         model.addAttribute("agentinfo", new AgentLoginData());
+        model.addAttribute("kindNames", agentsService.getAgentKindNames());
         return "login";
     }
 

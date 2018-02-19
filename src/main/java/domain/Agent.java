@@ -26,7 +26,7 @@ public class Agent {
     private String email;
     private String password;
     private String username;
-    private int kind;
+    private String kind;
 
     Agent(){ }
 
@@ -38,16 +38,16 @@ public class Agent {
     }
 
     public Agent(String name, String email, String password, 
-    				 String username, int kind) {
+    				 String username, String kindName) {
         this(name, email, password);
         this.username = username;
-        this.kind = kind;
+        this.kind = kindName;
     }
     
     public Agent(String name, String email, String password, 
-    		String username, int kind, double latitude, double longitude) {
+    		String username, String kindName, double latitude, double longitude) {
     	
-	    	this(name, email, password, username, kind);
+	    	this(name, email, password, username, kindName);
 	    	this.location = new double[2];
 	    	this.location[0] = latitude;
 	    	this.location[1] = longitude;
@@ -131,21 +131,21 @@ public class Agent {
 		this.username = username;
 	}
 
-	public int getKind() {
-		return kind;
-	}
-
-	public void setKind(int kind) {
-		this.kind = kind;
+	public int getKindCode() {
+		MasterFileParser parser = new CSVFileParser();
+		try {
+			return parser.getKindCodeOf(this.kind);
+		} catch (Exception e) {
+			return -1;
+		}
 	}
 	
-	public String getKindName() {
-		MasterFileParser parser = new CSVFileParser();
-		try {	
-			return parser.getKindNameOf(this.kind);
-		} catch (Exception e) {
-			return null;
-		}
+	public String getKind() {
+		return this.kind;
+	}
+	
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 
 	private String encryptPass(String password){
