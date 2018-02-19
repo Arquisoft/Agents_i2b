@@ -2,16 +2,16 @@ package domain;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "data")
+@XmlRootElement(name="data")
 public class AgentLoginData {
 
 	private String login;
 	private String password;
-	private int kind;
+	private String kind;
 
 	public AgentLoginData() {}
 
-	public AgentLoginData(String login, String password, int kind) {
+	public AgentLoginData(String login, String password, String kind) {
 		this.login = login;
 		this.password = password;
 		this.kind = kind;
@@ -25,7 +25,7 @@ public class AgentLoginData {
 		return password;
 	}
     
-    public int getKind() {
+    public String getKind() {
     		return kind;
     }
 
@@ -37,7 +37,7 @@ public class AgentLoginData {
 		this.password = password;
 	}
 	
-	public void setKind(int kind) {
+	public void setKind(String kind) {
 		this.kind = kind;
 	}
 }

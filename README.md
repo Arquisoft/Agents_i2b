@@ -59,7 +59,7 @@ agent interface manually you'll have to introduce this document:
       157,
       256
    ],
-   "kind" : 1,
+   "kind" : "Person",
    "username" : "pruebas",
    "password" : "khZZwjdhWwVbMdmOvz9eqBfKR1N6A+CdFBDM9c1dQduUnGewQyPRlBxB4Q6wT7Cq"
 }
@@ -68,7 +68,7 @@ agent interface manually you'll have to introduce this document:
 And as data use:
  - login: pruebas
  - password: 4[[j[frVCUMJ>hU
- - kind: 1
+ - kind: "Person"
 
  If you have the data and the database running and the application still reports a 404 Not Found when it shouldn't
  try deleting the document and adding it again.

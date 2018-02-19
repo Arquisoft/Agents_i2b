@@ -18,10 +18,10 @@ public class AgentLoginDataTest {
     @Before
     public void setUp() {
         test = new AgentLoginData();
-        test2 = new AgentLoginData("hola1", "holaPassword", 2);
+        test2 = new AgentLoginData("hola1", "holaPassword", "Person");
         test.setLogin("hola1");
         test.setPassword("holaPassword");
-        test.setKind(2);
+        test.setKind("Person");
     }
 
     @Test
@@ -37,8 +37,8 @@ public class AgentLoginDataTest {
     
     @Test
     public void getKind() throws Exception {
-    		assertEquals(2, test.getKind());
-    		assertEquals(2, test2.getKind());
+    		assertEquals("Person", test.getKind());
+    		assertEquals("Person", test2.getKind());
     }
 
     @Test
@@ -55,8 +55,8 @@ public class AgentLoginDataTest {
     
     @Test
     public void setKind() throws Exception {
-    		test.setKind(3);
-    		assertEquals(3, test.getKind());
+    		test.setKind("Sensor");
+    		assertEquals("Sensor", test.getKind());
     }
 
 }
