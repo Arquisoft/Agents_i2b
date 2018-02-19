@@ -1,10 +1,14 @@
 package services;
 
-import domain.Agent;
-import repositories.Database;
+import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import domain.Agent;
+import repositories.Database;
+import repositories.MasterFileParser;
 import util.JasyptEncryptor;
 
 /**
@@ -16,18 +20,20 @@ public class AgentsServiceImpl implements AgentsService {
 
     private final Database dat;
     private final JasyptEncryptor encryptor = new JasyptEncryptor();
+    private final MasterFileParser parser;
 
     @Autowired
-    AgentsServiceImpl(Database dat){
+    AgentsServiceImpl(Database dat, MasterFileParser parser) {
         this.dat = dat;
+        this.parser = parser;
     }
 
     @Override
-    public Agent getAgent(String username, String password, int kind) {
+    public Agent getAgent(String username, String password, String kind) {
         Agent user = dat.getAgent(username);
         if(user != null && encryptor.checkPassword(password, user.getPassword())
-        		&& kind== user.getKind())
-            return user;
+        		&& kind.equals(user.getKind()))
+        			return user;
         else return null;
     }
 
@@ -37,4 +43,9 @@ public class AgentsServiceImpl implements AgentsService {
 	    	agent.setPassword(newPassword);
 	    	dat.updateInfo(agent);
     }
+
+	@Override
+	public List<String> getAgentKindNames() throws IOException {
+		return parser.getKindNames();
+	}
 }

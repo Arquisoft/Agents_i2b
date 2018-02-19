@@ -1,4 +1,5 @@
-/target/
+/target/*
+!/target/agents_i2b*
 
 .metadata
 bin/

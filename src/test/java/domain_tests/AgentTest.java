@@ -19,10 +19,10 @@ public class AgentTest {
 
     @Before
     public void setUp() {
-        nico = new Agent("Nicolás Rivero", "nico@nicomail.com","nico123", "usernameNico", 0);
-        jorge = new Agent("Jorge Zapatero", "jorge@jorgemail.com", "jorge123", "111111111A", 1);
-        damian = new Agent("Damian Rubio", "damian@damianmail.com", "damian123", "222222222B", 2);
-        carmen = new Agent("Carmen", "c@c.com", "cccc", "181818S", 18, 20.48, 156.2);
+        nico = new Agent("Nicolás Rivero", "nico@nicomail.com","nico123", "usernameNico", "Person");
+        jorge = new Agent("Jorge Zapatero", "jorge@jorgemail.com", "jorge123", "111111111A", "Entity");
+        damian = new Agent("Damian Rubio", "damian@damianmail.com", "damian123", "222222222B", "Sensor");
+        carmen = new Agent("Carmen", "c@c.com", "cccc", "181818S", "Coco", 20.48, 156.2);
     }
 
     @Test
@@ -81,14 +81,14 @@ public class AgentTest {
     
     @Test
     public void kindTest() {
-	    	Assert.assertEquals(0, nico.getKind());
-	    	Assert.assertEquals(1, jorge.getKind());
-	    	Assert.assertEquals(2, damian.getKind());
+	    	Assert.assertEquals("Person", nico.getKind());
+	    	Assert.assertEquals("Entity", jorge.getKind());
+	    	Assert.assertEquals("Sensor", damian.getKind());
 	
-	    	nico.setKind(33);
-	    	Assert.assertEquals(33, nico.getKind());
+	    	nico.setKind("Entity");
+	    	Assert.assertEquals("Entity", nico.getKind());
 	    	
-	    	Assert.assertEquals(18, carmen.getKind());
+	    	Assert.assertEquals("Coco", carmen.getKind());
     }
     
     @Test
@@ -110,9 +110,9 @@ public class AgentTest {
     @Test
     public void toStringTest() {
     		Assert.assertEquals("Agent [id=null, name=Nicolás Rivero, email=nico@nicomail.com, "
-    				+ "username=usernameNico, kind=0]", nico.toString());
+    				+ "username=usernameNico, kind=Person]", nico.toString());
     		Assert.assertEquals("Agent [id=null, name=Carmen, location=[20.48, 156.2], "
-    				+ "email=c@c.com, username=181818S, kind=18]", carmen.toString());
+    				+ "email=c@c.com, username=181818S, kind=Coco]", carmen.toString());
     }
     
     @Test

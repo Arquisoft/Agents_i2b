@@ -34,10 +34,10 @@ public class DatabaseTest {
 
 	@Before
 	public void setUp() {
-		testedUser = new Agent("Luis Gracia", "LGracia@gmail.com", "Luis123", "147986", 12);
+		testedUser = new Agent("Luis Gracia", "LGracia@gmail.com", "Luis123", "147986", "Sensor");
 		repo.insert(testedUser);
-		
-		testedUser2 = new Agent("Maria MamaMia", "asd", "pass14753", "363636H", 25);
+
+		testedUser2 = new Agent("Maria MamaMia", "asd", "pass14753", "363636H", "Entity");
 		repo.insert(testedUser2);
 	}
 
@@ -56,7 +56,7 @@ public class DatabaseTest {
 		Assert.assertNotEquals(testedUser.getUsername(), user.getUsername());
 		Agent DBUser = dat.getAgent("147986");
 		// Should be different from as we changed a transient one.
-		Assert.assertNotEquals(user.getUsername(), DBUser.getUsername()); 
+		Assert.assertNotEquals(user.getUsername(), DBUser.getUsername());
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class DatabaseTest {
 		dat.updateInfo(user);
 		Agent userAfter = dat.getAgent("147986");
 		// They should be the same when we introduce the password.
-		Assert.assertTrue(encryptor.checkPassword("confidencial", userAfter.getPassword())); 
+		Assert.assertTrue(encryptor.checkPassword("confidencial", userAfter.getPassword()));
 		Assert.assertEquals(user, userAfter); // They should be the same user by the equals.
 
 	}
@@ -77,7 +77,7 @@ public class DatabaseTest {
 	public void testUpdateInfo() {
 		Agent user = dat.getAgent("363636H");
 		Assert.assertEquals("Maria MamaMia", user.getName());
-		Assert.assertEquals(25, user.getKind());
+		Assert.assertEquals("Entity", user.getKind());
 		Assert.assertEquals("363636H", user.getUsername());
 		Assert.assertEquals("asd", user.getEmail());
 
@@ -86,7 +86,7 @@ public class DatabaseTest {
 		dat.updateInfo(user);
 		Agent updatedUser = dat.getAgent("363636H");
 		Assert.assertEquals("Pepa Trump", updatedUser.getName());
-		Assert.assertEquals(25, updatedUser.getKind());
+		Assert.assertEquals("Entity", updatedUser.getKind());
 		Assert.assertEquals("363636H", updatedUser.getUsername());
 		Assert.assertEquals("asd", updatedUser.getEmail());
 
