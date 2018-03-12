@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  agents:
+    build:
+      context: .
+    image: agents_i2b
+    ports:
+      - "8000:8080"
+    depends_on:
+      - mongo
