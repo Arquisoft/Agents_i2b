@@ -24,7 +24,7 @@ public class InsertSampleDataService {
 		
 		Agent agent1 = new Agent("Paco", "pacoo11@gmail.com", "123456", "pacoo", "Person");
 		Agent agent2 = new Agent("Carmen", "carmeen2@gmail.com", "123456", "carmeen", "Entity");
-		Agent agent3 = new Agent("Son", "david_son1@naver.co.kr", "cocoKiko", "pruebas", "Person");
+		Agent agent3 = new Agent("Son", "david_son1@naver.co.kr", "pass123", "sonny", "Person");
 		
 		database.updateInfo(agent1);
 		database.updateInfo(agent2);
