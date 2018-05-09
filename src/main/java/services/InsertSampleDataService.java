@@ -5,9 +5,9 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dbmanagement.AgentsRepository;
+import dbmanagement.Database;
 import domain.Agent;
-import repositories.AgentsRepository;
-import repositories.Database;
 
 @Service
 public class InsertSampleDataService {
