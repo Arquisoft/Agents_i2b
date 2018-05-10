@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dbmanagement.Database;
 import domain.Agent;
-import repositories.Database;
-import repositories.MasterFileParser;
+import parser.MasterFileParser;
 import util.JasyptEncryptor;
 
 /**

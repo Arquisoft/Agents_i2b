@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import repositories.CSVFileParser;
+import parser.CSVFileParser;
 
 public class CSVParserTest {
 	

@@ -6,8 +6,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import repositories.CSVFileParser;
-import repositories.MasterFileParser;
+import parser.CSVFileParser;
+import parser.MasterFileParser;
 import util.JasyptEncryptor;
 
 /**
