@@ -73,6 +73,6 @@ And as data use:
  If you have the data and the database running and the application still reports a 404 Not Found when it shouldn't
  try deleting the document and adding it again.
 
-
-
+# Wiki
+For further information regarding the project, check our [wiki](https://github.com/Arquisoft/Agents_i2b/wiki).
 
